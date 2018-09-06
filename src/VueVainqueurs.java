@@ -33,5 +33,14 @@ public class VueVainqueurs extends Application{
 
 		stade.setScene(new Scene(panneau, 600, 500));
 		stade.show();
+		
+		Vainqueur vainqueur = new Vainqueur("Real de Madrid", "20/01/1989", "Zidane", "Robinho");
+		
+	}
+	
+	public void afficherMouton(Vainqueur vainqueur)
+	{
+		
+		
 	}
 }

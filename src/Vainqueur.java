@@ -1,10 +1,29 @@
 
 public class Vainqueur {
-	protected String nomEquipe;
+ 	protected String nomEquipe;
 	protected String entraineur;
 	protected String date;
 	protected String capitaine;
-
+	
+	
+	public Vainqueur(String nomEquipe) {
+		super();
+		this.nomEquipe = nomEquipe;
+	}
+	public Vainqueur(String nomEquipe, String date) {
+		super();
+		this.nomEquipe = nomEquipe;
+		this.date = date;
+	}
+	public Vainqueur(String nomEquipe, String date, String entraineur, String capitaine) {
+		super();
+		this.nomEquipe = nomEquipe;
+		this.date = date;
+		this.entraineur = entraineur;
+		this.capitaine = capitaine;
+	}
+	
+	
 	public String getNomEquipe() {
 		return nomEquipe;
 	}
@@ -29,6 +48,6 @@ public class Vainqueur {
 	public void setCapitaine(String capitaine) {
 		this.capitaine = capitaine;
 	}
+	
+}
 
-}
-}
