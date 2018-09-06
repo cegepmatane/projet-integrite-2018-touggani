@@ -38,7 +38,7 @@ public class VueVainqueurs extends Application{
 		
 	}
 	
-	public void afficherMouton(Vainqueur vainqueur)
+	public void afficherVainqueur(Vainqueur vainqueur)
 	{
 		
 		
