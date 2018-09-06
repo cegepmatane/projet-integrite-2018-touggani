@@ -6,25 +6,30 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 public class VueVainqueurs extends Application{
- @Override
+ 	
+	protected Label valeurNomEquipe;
+	protected Label valeurEntraineur;
+	protected Label valeurDate;
+	protected Label valeurCapitaine;
+	
 	public void start(Stage stade) throws Exception {
 	 	Pane panneau = new Pane();	
 		GridPane grilleVainqueur = new GridPane();
-		Label valeurNomEquipe = new Label("Paris Saint Germain");
+		valeurNomEquipe = new Label("");
 		grilleVainqueur.add(new Label("Nom : "), 0, 0);
 		grilleVainqueur.add(valeurNomEquipe, 1, 0);
 		
-		Label valeurEntraineur = new Label("Unai Emery");
+		valeurEntraineur = new Label("");
 		
 		grilleVainqueur.add(new Label("Entraineur : "), 0, 1);
 		grilleVainqueur.add(valeurEntraineur, 1, 1);
 		
-		Label valeurDate = new Label("8 Mai 1980");
+		valeurDate = new Label("");
 		
 		grilleVainqueur.add(new Label("Date : "), 0, 2);
 		grilleVainqueur.add(valeurDate, 1, 2);
 		
-		Label valeurCapitaine = new Label("Thiago Silva");
+		valeurCapitaine = new Label("");
 		
 		grilleVainqueur.add(new Label("Capitaine : "), 0, 3);
 		grilleVainqueur.add(valeurCapitaine, 1, 3);	
@@ -35,12 +40,15 @@ public class VueVainqueurs extends Application{
 		stade.show();
 		
 		Vainqueur vainqueur = new Vainqueur("Real de Madrid", "20/01/1989", "Zidane", "Robinho");
-		
+		this.afficherVainqueur(vainqueur);
 	}
 	
 	public void afficherVainqueur(Vainqueur vainqueur)
 	{
-		
+		this.valeurNomEquipe.setText(vainqueur.getNomEquipe());
+		this.valeurEntraineur.setText(vainqueur.getEntraineur());
+		this.valeurDate.setText(vainqueur.getDate());
+		this.valeurCapitaine.setText(vainqueur.getCapitaine());	
 		
 	}
 }
