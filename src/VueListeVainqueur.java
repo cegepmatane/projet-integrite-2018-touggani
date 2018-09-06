@@ -34,16 +34,11 @@ import javafx.scene.control.Label;
 			int numero = 0;
 			this.grilleVainqueurs.add(new Label("Nom Equipe"), 0, numero);
 			this.grilleVainqueurs.add(new Label("Date"), 1, numero);
-			this.grilleVainqueurs.add(new Label("Entraineur"), 2, numero);
-			this.grilleVainqueurs.add(new Label("Capitaine"), 3, numero);
 			for(Vainqueur vainqueur : listeVainqueurs)
 			{
 				numero++;
 				this.grilleVainqueurs.add(new Label(vainqueur.getNomEquipe()), 0, numero);
-				this.grilleVainqueurs.add(new Label(vainqueur.getDate()), 1, numero);	
-				this.grilleVainqueurs.add(new Label(vainqueur.getEntraineur()), 2, numero);			
-				this.grilleVainqueurs.add(new Label(vainqueur.getCapitaine()), 3, numero);			
-
+				this.grilleVainqueurs.add(new Label(vainqueur.getDate()), 1, numero);				
 			}
 		}
 }
