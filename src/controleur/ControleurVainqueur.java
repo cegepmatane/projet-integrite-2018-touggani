@@ -36,6 +36,7 @@ public class ControleurVainqueur {
 		this.vueListeVainqueur.afficherListeVainqueurs(listeVainqueurTest);
 		
 		this.navigateur.naviguerVersVueListeVainqueur();	
+		this.navigateur.naviguerVersVueAjouterVainqueur();
 	}
 	
 	private static ControleurVainqueur instance = null;

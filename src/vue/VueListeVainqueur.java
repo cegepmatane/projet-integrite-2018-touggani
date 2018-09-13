@@ -23,6 +23,7 @@ import javafx.scene.control.Label;
 		
 		public void afficherListeVainqueurs(List<Vainqueur> listeVainqueurs)
 		{
+			this.grilleVainqueurs.getChildren().clear();
 			int numero = 0;
 			this.grilleVainqueurs.add(new Label("Nom Equipe"), 0, numero);
 			this.grilleVainqueurs.add(new Label("Date"), 1, numero);
