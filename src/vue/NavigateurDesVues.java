@@ -1,10 +1,9 @@
 package vue;
-import controleur.ControleurVainqueur;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import modele.Vainqueur;
 
-import java.util.ArrayList;
+
+import action.ControleurVainqueur;
 
 
  public class NavigateurDesVues extends Application{

@@ -1,8 +1,6 @@
 package vue;
 
-
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
 import modele.Vainqueur;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
