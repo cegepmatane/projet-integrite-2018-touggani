@@ -1,6 +1,7 @@
 package vue;
 import javafx.scene.layout.VBox;
 import modele.Vainqueur;
+import action.ControleurVainqueur;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,6 +14,7 @@ import javafx.scene.layout.GridPane;
 	protected TextField valeurDate;
 	protected TextField valeurEntraineur;
 	protected TextField valeurCapitaine;
+	private ControleurVainqueur controleur = null;
 	
 
 	public VueAjouterVainqueur() {
@@ -45,5 +47,8 @@ import javafx.scene.layout.GridPane;
 				this.valeurEntraineur.getText(),
 				this.valeurCapitaine.getText());
 				return vainqueur;
+	}
+	public void setControleur(ControleurVainqueur controleur) {
+		this.controleur = controleur;
 	}
  }

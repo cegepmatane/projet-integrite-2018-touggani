@@ -4,6 +4,7 @@ import javafx.scene.Scene;
 import modele.Vainqueur;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+import action.ControleurVainqueur;
 
 public class VueVainqueurs extends Scene{
  	
@@ -11,6 +12,7 @@ public class VueVainqueurs extends Scene{
 	protected Label valeurEntraineur;
 	protected Label valeurDate;
 	protected Label valeurCapitaine;
+	private ControleurVainqueur controleur = null;
 	
 	public VueVainqueurs() {
 		super(new GridPane(),600,500);
@@ -44,5 +46,8 @@ public class VueVainqueurs extends Scene{
 		this.valeurDate.setText(vainqueur.getDate());
 		this.valeurCapitaine.setText(vainqueur.getCapitaine());	
 		
+	}
+	public void setControleur(ControleurVainqueur controleur) {
+		this.controleur = controleur;
 	}
 }
