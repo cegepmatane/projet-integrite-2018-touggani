@@ -6,6 +6,7 @@ import vue.VueVainqueurs;
 import java.util.ArrayList;
 import java.util.List;
  import modele.Vainqueur;
+ import accesseur.VainqueurDAO;
 
 public class ControleurVainqueur {
 	
@@ -30,13 +31,12 @@ public class ControleurVainqueur {
 		
 		this.navigateur.naviguerVersVueVainqueur();
 		
-		ArrayList<Vainqueur> listeVainqueurTest = new ArrayList<Vainqueur>();
-		listeVainqueurTest.add(new Vainqueur("Paris", "2 Mai 2018", "Blanc", "Luis"));
-		listeVainqueurTest.add(new Vainqueur("Liverpool", "18 Juin 1985", "Kloop", "Salah"));
+		VainqueurDAO moutonDAO = new VainqueurDAO();
+		List<Vainqueur> listeVainqueurTest = moutonDAO.listerVainqueur();
 		this.vueListeVainqueur.afficherListeVainqueurs(listeVainqueurTest);
 		
 		this.navigateur.naviguerVersVueListeVainqueur();	
-		this.navigateur.naviguerVersVueAjouterVainqueur();
+
 	}
 	
 	private static ControleurVainqueur instance = null;

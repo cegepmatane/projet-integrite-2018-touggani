@@ -15,9 +15,8 @@ public class VueVainqueurs extends Scene{
 	protected Label valeurCapitaine;
 	
 	public VueVainqueurs() {
-		super(new Pane(),600,500);
-		Pane panneau = (Pane) this.getRoot();
-		GridPane grilleVainqueur = new GridPane();
+		super(new GridPane(),600,500);
+		GridPane grilleVainqueur = (GridPane) this.getRoot();
 		valeurNomEquipe = new Label("");
 		grilleVainqueur.add(new Label("Nom : "), 0, 0);
 		grilleVainqueur.add(valeurNomEquipe, 1, 0);
@@ -36,8 +35,7 @@ public class VueVainqueurs extends Scene{
 		
 		grilleVainqueur.add(new Label("Capitaine : "), 0, 3);
 		grilleVainqueur.add(valeurCapitaine, 1, 3);	
-		
-		panneau.getChildren().add(grilleVainqueur);		
+			
 
 	}
 	

@@ -14,11 +14,8 @@ import javafx.scene.control.Label;
 	 protected GridPane grilleVainqueurs;
 	 
 	public VueListeVainqueur() {
-		super(new Pane(), 600,500);
-		Pane panneau = (Pane) this.getRoot();
-		grilleVainqueurs = new GridPane();		
-		
-		panneau.getChildren().add(grilleVainqueurs);
+		super(new GridPane(), 600,500);
+		grilleVainqueurs = (GridPane) this.getRoot();
 		}
 		
 		public void afficherListeVainqueurs(List<Vainqueur> listeVainqueurs)
