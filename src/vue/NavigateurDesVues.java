@@ -28,7 +28,8 @@ import java.util.ArrayList;
 		this.stade.setScene(this.vueListeVainqueur);
 		this.stade.show();
 	
-		this.controleur = new ControleurVainqueur(this); 
+		this.controleur = ControleurVainqueur.getInstance(); 
+		this.controleur.activerVues(this);
 
 	 	}	
 		
