@@ -29,6 +29,9 @@ import action.ControleurVainqueur;
 	
 		this.controleur = ControleurVainqueur.getInstance(); 
 		this.controleur.activerVues(this);
+		this.vueAjouterVainqueur.setControleur(controleur);
+		this.vueListeVainqueur.setControleur(controleur);
+		this.vueVainqueur.setControleur(controleur);
 
 	 	}	
 		

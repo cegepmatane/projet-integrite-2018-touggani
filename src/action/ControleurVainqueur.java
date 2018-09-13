@@ -14,10 +14,13 @@ public class ControleurVainqueur {
 	private VueAjouterVainqueur vueAjouterVainqueur = null;
 	private VueListeVainqueur vueListeVainqueur = null;
 	private VueVainqueurs vueVainqueur = null;
+	
+	VainqueurDAO vainqueurDAO = null;
 		
 	public ControleurVainqueur()
 	{
-		System.out.println("Initialisation du controleur");		
+		System.out.println("Initialisation du controleur");
+		this.vainqueurDAO = new VainqueurDAO();
 	}
 	public void activerVues(NavigateurDesVues navigateur)
 	{
@@ -31,11 +34,11 @@ public class ControleurVainqueur {
 		
 		this.navigateur.naviguerVersVueVainqueur();
 		
-		VainqueurDAO moutonDAO = new VainqueurDAO();
-		List<Vainqueur> listeVainqueurTest = moutonDAO.listerVainqueur();
+		List<Vainqueur> listeVainqueurTest = vainqueurDAO.listerVainqueur();
 		this.vueListeVainqueur.afficherListeVainqueurs(listeVainqueurTest);
 		
 		this.navigateur.naviguerVersVueListeVainqueur();	
+		this.navigateur.naviguerVersVueAjouterVainqueur();
 
 	}
 	
@@ -44,5 +47,13 @@ public class ControleurVainqueur {
 	{
 		if(null == instance) instance = new ControleurVainqueur();
 		return instance;
+	}
+	
+	public void notifierEnregistrerVainqueur()
+	{
+		System.out.println("ControleurVainqueur.notifierEnregistrerVainqueur()");
+		Vainqueur vainqueur = this.navigateur.getVueAjouterVainqueur().demanderVainqueur();
+		//this.vainqueurDAO.ajouterVainqueur(vainqueur);
+		this.navigateur.naviguerVersVueListeVainqueur();
 	}
 }

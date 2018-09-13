@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 
  public class VueAjouterVainqueur extends Scene{
@@ -15,12 +17,24 @@ import javafx.scene.layout.GridPane;
 	protected TextField valeurEntraineur;
 	protected TextField valeurCapitaine;
 	private ControleurVainqueur controleur = null;
+	protected Button actionEnregistrerVainqueur = null;
 	
 
 	public VueAjouterVainqueur() {
 		super(new VBox(), 600, 500);
 		VBox panneau = (VBox) this.getRoot();
 		GridPane grilleVainqueur = new GridPane();
+		
+		this.actionEnregistrerVainqueur = new Button("Enregistrer");
+		
+		this.actionEnregistrerVainqueur.setOnAction(new EventHandler<ActionEvent>() {
+ 			@Override
+			public void handle(ActionEvent arg0) {
+				
+				controleur.notifierEnregistrerVainqueur();
+				
+			}});
+		
 		valeurNomEquipe = new TextField();
 		grilleVainqueur.add(new Label("Nom : "), 0, 0);
 		grilleVainqueur.add(valeurNomEquipe, 1, 0);
@@ -36,7 +50,7 @@ import javafx.scene.layout.GridPane;
 		grilleVainqueur.add(valeurCapitaine, 1, 3);				
 		panneau.getChildren().add(new Label("Ajouter un vainqueur")); 
 		panneau.getChildren().add(grilleVainqueur);
-		panneau.getChildren().add(new Button("Enregistrer"));		
+		panneau.getChildren().add(this.actionEnregistrerVainqueur);		
 	}
 	
 	public Vainqueur demanderVainqueur()
