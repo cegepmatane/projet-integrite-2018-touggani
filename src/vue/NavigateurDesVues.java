@@ -10,25 +10,16 @@ import java.util.ArrayList;
  public class NavigateurDesVues extends Application{
 	
 	private Stage stade;
-	private VueAjouterVainqueur vueAjouterVainqueur;
-	private VueListeVainqueur vueListeVainqueur;
-	private VueVainqueurs vueVainqueur;
-	private ControleurVainqueur controleur;
+	private VueAjouterVainqueur vueAjouterVainqueur = null;
+	private VueListeVainqueur vueListeVainqueur = null;
+	private VueVainqueurs vueVainqueur = null;
+	private ControleurVainqueur controleur = null;
 	
 	public NavigateurDesVues() 
 	{
-		this.controleur = new ControleurVainqueur(this);
 		this.vueAjouterVainqueur = new VueAjouterVainqueur();
 		this.vueListeVainqueur = new VueListeVainqueur();
 		this.vueVainqueur = new VueVainqueurs();
-		
-		ArrayList<Vainqueur> listeVainqueurTest = new ArrayList<Vainqueur>();
-		listeVainqueurTest.add(new Vainqueur("Paris", "2 Mai 2018", "Blanc", "Luis"));
-		listeVainqueurTest.add(new Vainqueur("Liverpool", "18 Juin 1985", "Kloop", "Salah"));
-		this.vueListeVainqueur.afficherListeVainqueurs(listeVainqueurTest);
-
-		Vainqueur vainqueur = new Vainqueur("Paris", "2 Mai 2018", "Blanc", "Luis");
-		this.vueVainqueur.afficherVainqueur(vainqueur); 
 	}
 	
 	@Override
@@ -37,10 +28,8 @@ import java.util.ArrayList;
 		this.stade.setScene(this.vueListeVainqueur);
 		this.stade.show();
 	
-		//// TEST ////
-		this.naviguerVersVueListeVainqueur();
-		this.naviguerVersVueVainqueur();
-		this.naviguerVersVueAjouterVainqueur();
+		this.controleur = new ControleurVainqueur(this); 
+
 	 	}	
 		
 		public VueAjouterVainqueur getVueAjouterVainqueur() {
