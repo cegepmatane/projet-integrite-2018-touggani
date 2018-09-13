@@ -1,20 +1,20 @@
 
-import javafx.application.Application;
-import javafx.stage.Stage;
+
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
-public class VueVainqueurs extends Application{
+public class VueVainqueurs extends Scene{
  	
 	protected Label valeurNomEquipe;
 	protected Label valeurEntraineur;
 	protected Label valeurDate;
 	protected Label valeurCapitaine;
 	
-	public void start(Stage stade) throws Exception {
-	 	Pane panneau = new Pane();	
+	public VueVainqueurs() {
+		super(new Pane(),600,500);
+		Pane panneau = (Pane) this.getRoot();
 		GridPane grilleVainqueur = new GridPane();
 		valeurNomEquipe = new Label("");
 		grilleVainqueur.add(new Label("Nom : "), 0, 0);
@@ -37,8 +37,6 @@ public class VueVainqueurs extends Application{
 		
 		panneau.getChildren().add(grilleVainqueur);
 
-		stade.setScene(new Scene(panneau, 600, 500));
-		stade.show();
 		
 		Vainqueur vainqueur = new Vainqueur("Real de Madrid", "20/01/1989", "Zidane", "Robinho");
 		this.afficherVainqueur(vainqueur);

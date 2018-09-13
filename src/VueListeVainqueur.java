@@ -1,9 +1,9 @@
 
-import javafx.application.Application;
+
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,17 +11,16 @@ import java.util.List;
 import javafx.scene.control.Label;
 
 
- public class VueListeVainqueur extends Application {
+ public class VueListeVainqueur extends Scene {
  	
 	 protected GridPane grilleVainqueurs;
 	 
-	public void start(Stage stade) throws Exception {
-		Pane panneau = new Pane();	
+	public VueListeVainqueur() {
+		super(new Pane(), 600,500);
+		Pane panneau = (Pane) this.getRoot();
 		grilleVainqueurs = new GridPane();
 		
 		panneau.getChildren().add(grilleVainqueurs);
-		stade.setScene(new Scene(panneau, 400, 400));
-		stade.show();
 		
 		/// TEST ///
 		List <Vainqueur> listeVainqueursTest = new ArrayList<Vainqueur>();
