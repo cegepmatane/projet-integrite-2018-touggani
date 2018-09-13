@@ -1,21 +1,21 @@
-import javafx.application.Application;
+import javafx.scene.layout.VBox;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
- public class VueAjouterVainqueur extends Application{
+
+ public class VueAjouterVainqueur extends Scene{
  	protected TextField valeurNomEquipe;
 	protected TextField valeurDate;
 	protected TextField valeurEntraineur;
 	protected TextField valeurCapitaine;
 	
-	@Override
-	public void start(Stage stade) throws Exception {
-		VBox panneau = new VBox();	
+
+	public VueAjouterVainqueur() {
+		super(new VBox(), 600, 500);
+		VBox panneau = (VBox) this.getRoot();
 		GridPane grilleVainqueur = new GridPane();
 		valeurNomEquipe = new TextField();
 		grilleVainqueur.add(new Label("Nom : "), 0, 0);
@@ -32,13 +32,16 @@ import javafx.stage.Stage;
 		grilleVainqueur.add(valeurCapitaine, 1, 3);				
 		panneau.getChildren().add(new Label("Ajouter un vainqueur")); 
 		panneau.getChildren().add(grilleVainqueur);
-		panneau.getChildren().add(new Button("Enregistrer"));
-		stade.setScene(new Scene(panneau, 400, 400));
-		stade.show();		
+		panneau.getChildren().add(new Button("Enregistrer"));		
 	}
 	
 	public Vainqueur demanderVainqueur()
 	{
-		return null;
+		Vainqueur vainqueur = new Vainqueur(
+				this.valeurNomEquipe.getText(), 
+				this.valeurDate.getText(), 
+				this.valeurEntraineur.getText(),
+				this.valeurCapitaine.getText());
+				return vainqueur;
 	}
  }

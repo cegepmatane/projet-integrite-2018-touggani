@@ -1,4 +1,5 @@
 
+
 public class Vainqueur {
  	protected String nomEquipe;
 	protected String entraineur;

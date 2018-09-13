@@ -1,4 +1,5 @@
 
+
 public class Competitions {
 	protected String nomCompetition;
 	protected String ampleurCompetition;
