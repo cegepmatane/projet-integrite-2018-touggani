@@ -35,11 +35,8 @@ public class VueVainqueurs extends Scene{
 		grilleVainqueur.add(new Label("Capitaine : "), 0, 3);
 		grilleVainqueur.add(valeurCapitaine, 1, 3);	
 		
-		panneau.getChildren().add(grilleVainqueur);
+		panneau.getChildren().add(grilleVainqueur);		
 
-		
-		Vainqueur vainqueur = new Vainqueur("Real de Madrid", "20/01/1989", "Zidane", "Robinho");
-		this.afficherVainqueur(vainqueur);
 	}
 	
 	public void afficherVainqueur(Vainqueur vainqueur)

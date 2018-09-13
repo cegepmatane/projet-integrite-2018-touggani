@@ -1,5 +1,7 @@
 import javafx.application.Application;
 import javafx.stage.Stage;
+import java.util.ArrayList;
+
 
  public class NavigateurDesVues extends Application{
 	
@@ -12,6 +14,14 @@ import javafx.stage.Stage;
 		this.vueAjouterVainqueur = new VueAjouterVainqueur();
 		this.vueListeVainqueur = new VueListeVainqueur();
 		this.vueVainqueur = new VueVainqueurs();
+		
+		ArrayList<Vainqueur> listeVainqueurTest = new ArrayList<Vainqueur>();
+		listeVainqueurTest.add(new Vainqueur("Paris", "2 Mai 2018", "Blanc", "Luis"));
+		listeVainqueurTest.add(new Vainqueur("Liverpool", "18 Juin 1985", "Kloop", "Salah"));
+		this.vueListeVainqueur.afficherListeVainqueurs(listeVainqueurTest);
+
+		Vainqueur vainqueur = new Vainqueur("Paris", "2 Mai 2018", "Blanc", "Luis");
+		this.vueVainqueur.afficherVainqueur(vainqueur); 
 	}
 	
 	@Override

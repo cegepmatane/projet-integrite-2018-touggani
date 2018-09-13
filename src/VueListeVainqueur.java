@@ -1,13 +1,7 @@
-
-
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-
-
-import java.util.ArrayList;
 import java.util.List;
-
 import javafx.scene.control.Label;
 
 
@@ -18,17 +12,9 @@ import javafx.scene.control.Label;
 	public VueListeVainqueur() {
 		super(new Pane(), 600,500);
 		Pane panneau = (Pane) this.getRoot();
-		grilleVainqueurs = new GridPane();
+		grilleVainqueurs = new GridPane();		
 		
 		panneau.getChildren().add(grilleVainqueurs);
-		
-		/// TEST ///
-		List <Vainqueur> listeVainqueursTest = new ArrayList<Vainqueur>();
-		listeVainqueursTest.add(new Vainqueur("Real de Madrid", "20/01/1989", "Zidane", "Robinho"));
-		listeVainqueursTest.add(new Vainqueur("Liverpool", "02/07/1989", "Ancelotti", "Gerrard"));
-		this.afficherListeVainqueurs(listeVainqueursTest); 
-			
-			
 		}
 		
 		public void afficherListeVainqueurs(List<Vainqueur> listeVainqueurs)
