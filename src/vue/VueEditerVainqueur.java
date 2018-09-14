@@ -19,6 +19,8 @@ public class VueEditerVainqueur extends Scene {
 	
 	private ControleurVainqueur controleur = null;
 	protected Button actionEnregistrerVainqueur = null;
+	GridPane grilleListeDistinctions = new GridPane();
+
 	
 	private int idVainqueur = 0;
 	
@@ -51,10 +53,17 @@ public class VueEditerVainqueur extends Scene {
  		valeurCapitaine = new TextField("");
 		grilleVainqueur.add(new Label("Capitaine : "), 0, 3);
 		grilleVainqueur.add(valeurCapitaine, 1, 3);				
+		
+		this.grilleListeDistinctions.add(new Label("Distinction 1"), 0, 0);
+		this.grilleListeDistinctions.add(new Label("Distinction 2"), 0, 1);
+		this.grilleListeDistinctions.add(new Label("Distinction 3"), 0, 2);
+		this.grilleListeDistinctions.add(new Label("Distinction 4"), 0, 3);
 
 		panneau.getChildren().add(new Label("Editer un vainqueur"));
 		panneau.getChildren().add(grilleVainqueur);
 		panneau.getChildren().add(this.actionEnregistrerVainqueur);
+		panneau.getChildren().add(grilleListeDistinctions);
+
 	}
 	
 	public void afficherVainqueur(Vainqueur vainqueur)
