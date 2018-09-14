@@ -19,23 +19,35 @@ public class VainqueurDAO {
 		listeVainqueurTest.add(new Vainqueur("Liverpool", "18 Juin 1985", "Kloop", "Salah"));
 		return listeVainqueurTest;
 	}
-	public List<Vainqueur> listerVainqueur()
-	{
-		String BASEDEDONNEES_DRIVER = "org.postgresql.Driver";
-		String BASEDEDONNEES_URL = "jdbc:postgresql://localhost:5432/Competition";
-		String BASEDEDONNEES_USAGER = "postgres";
-		String BASEDEDONNEES_MOTDEPASSE = "root";
-		
+	
+	private static String BASEDEDONNEES_DRIVER = "org.postgresql.Driver";
+	private static String BASEDEDONNEES_URL = "jdbc:postgresql://localhost:5432/Competition";
+	private static String BASEDEDONNEES_USAGER = "postgres";
+	private static String BASEDEDONNEES_MOTDEPASSE = "root";	
+	private Connection connection = null;
+	
+	public VainqueurDAO()
+	{		
 		try {
 			Class.forName(BASEDEDONNEES_DRIVER);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		
-		List<Vainqueur> listeVainqueur =  new ArrayList<Vainqueur>();
+
 		try {
-			Connection connection = DriverManager.getConnection(BASEDEDONNEES_URL, BASEDEDONNEES_USAGER, BASEDEDONNEES_MOTDEPASSE);
-			Statement requeteListeVainqueur = connection.createStatement();
+			connection = DriverManager.getConnection(BASEDEDONNEES_URL, BASEDEDONNEES_USAGER, BASEDEDONNEES_MOTDEPASSE);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public List<Vainqueur> listerVainqueur()
+	{
+ 		List<Vainqueur> listeVainqueur =  new ArrayList<Vainqueur>();			
+		Statement requeteListeVainqueur;
+		try {
+			requeteListeVainqueur = connection.createStatement();
 			ResultSet curseurListeVainqueur = requeteListeVainqueur.executeQuery("SELECT * FROM vainqueur");
 			while(curseurListeVainqueur.next())
 			{
@@ -43,15 +55,29 @@ public class VainqueurDAO {
 				String date = curseurListeVainqueur.getString("date");
 				String entraineur = curseurListeVainqueur.getString("entraineur");
 				String capitaine = curseurListeVainqueur.getString("capitaine");
-				System.out.println("Vainqueur " + nomEquipe + " a gagné le " + date + " avec le coach " + entraineur + " et le capitaine " + capitaine);
-				Vainqueur mouton = new Vainqueur(nomEquipe, date, entraineur, capitaine);
-				listeVainqueur.add(mouton);
+				System.out.println("Vainqueur " + nomEquipe + " a gagné le " + date + " avec le coach " + entraineur + " et avec le capitaine " + capitaine);
+				Vainqueur vainqueur = new Vainqueur(nomEquipe, date, entraineur, capitaine);
+				listeVainqueur.add(vainqueur);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		//return this.simulerListerVainqueur();
 		return listeVainqueur;
+	}
+	
+	public void ajouterVainqueur(Vainqueur vainqueur)
+	{
+		System.out.println("VainqueurDAO.ajouterVainqueur()");
+		try {
+			Statement requeteAjouterVainqueur = connection.createStatement();
+			String sqlAjouterVainqueur = "INSERT into vainqueur (date, entraineur, capitaine, nomEquipe) VALUES ('"+vainqueur.getDate()+"','"+vainqueur.getEntraineur()+"','"+vainqueur.getCapitaine()+"','"+vainqueur.getNomEquipe()+"')";
+			System.out.println("SQL : " + sqlAjouterVainqueur);	
+			requeteAjouterVainqueur.execute(sqlAjouterVainqueur);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 }

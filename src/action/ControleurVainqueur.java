@@ -38,7 +38,7 @@ public class ControleurVainqueur {
 		this.vueListeVainqueur.afficherListeVainqueurs(listeVainqueurTest);
 		
 		this.navigateur.naviguerVersVueListeVainqueur();	
-		this.navigateur.naviguerVersVueAjouterVainqueur();
+		//this.navigateur.naviguerVersVueAjouterVainqueur();
 
 	}
 	
@@ -53,7 +53,13 @@ public class ControleurVainqueur {
 	{
 		System.out.println("ControleurVainqueur.notifierEnregistrerVainqueur()");
 		Vainqueur vainqueur = this.navigateur.getVueAjouterVainqueur().demanderVainqueur();
-		//this.vainqueurDAO.ajouterVainqueur(vainqueur);
+		this.vainqueurDAO.ajouterVainqueur(vainqueur);
+		this.vueListeVainqueur.afficherListeVainqueurs(this.vainqueurDAO.listerVainqueur());
 		this.navigateur.naviguerVersVueListeVainqueur();
+	}
+	public void notifierNaviguerAjouterVainqueur()
+	{
+		System.out.println("ControleurVainqueur.notifierNaviguerAjouterVainqueur()");
+		this.navigateur.naviguerVersVueAjouterVainqueur();
 	}
 }

@@ -36,26 +36,54 @@ SET row_security = off;
  SET default_tablespace = '';
  SET default_with_oids = false;
  --
--- Name: match; Type: TABLE; Schema: public; Owner: postgres
+-- Name: vainqueur; Type: TABLE; Schema: public; Owner: postgres
 --
- CREATE TABLE match (
-    id integer NOT NULL,
+ CREATE TABLE vainqueur (
 	nomEquipe text,
     Entraineur text,
     date text,
-    capitaine text
+    capitaine text,
+	id integer NOT NULL
 );
- ALTER TABLE match OWNER TO postgres;
+ ALTER TABLE vainqueur OWNER TO postgres;
+ 
  --
--- Data for Name: match; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Name: vainqueur_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
- INSERT INTO match VALUES (2, 'Paris', '2 Mai 2018', 'Blanc', 'Luis');
-INSERT INTO match VALUES (1, 'Liverpool', '18 Juin 1985', 'Kloop', 'Salah');
+ CREATE SEQUENCE vainqueur_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+ ALTER TABLE vainqueur_id_seq OWNER TO postgres;
  --
--- Name: match match_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: vainqueur_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
 --
- ALTER TABLE ONLY match
-    ADD CONSTRAINT match_pkey PRIMARY KEY (id);
+ ALTER SEQUENCE vainqueur_id_seq OWNED BY vainqueur.id;
+ --
+-- Name: vainqueur id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+ ALTER TABLE ONLY vainqueur ALTER COLUMN id SET DEFAULT nextval('vainqueur_id_seq'::regclass);
+
+ --
+-- Data for Name: vainqueur; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+	
+ --
+-- Name: vainqueur vainqueur_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+INSERT INTO vainqueur VALUES ('Real', '11 Mai 2013', 'Makelele', 'Benzema', 1);
+INSERT INTO vainqueur VALUES ('Bayern', '25 Juin 2011', 'Guardiola', 'Robben', 2);
+
+ --
+-- Name: vainqueur_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+ SELECT pg_catalog.setval('vainqueur_id_seq', 4, true);
+
+ ALTER TABLE ONLY vainqueur
+    ADD CONSTRAINT vainqueur_pkey PRIMARY KEY (id);
  --
 -- PostgreSQL database dump complete
 --

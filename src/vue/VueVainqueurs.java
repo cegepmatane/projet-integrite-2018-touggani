@@ -4,6 +4,8 @@ import javafx.scene.Scene;
 import modele.Vainqueur;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
+
+
 import action.ControleurVainqueur;
 
 public class VueVainqueurs extends Scene{
@@ -50,4 +52,6 @@ public class VueVainqueurs extends Scene{
 	public void setControleur(ControleurVainqueur controleur) {
 		this.controleur = controleur;
 	}
+	
+	
 }
