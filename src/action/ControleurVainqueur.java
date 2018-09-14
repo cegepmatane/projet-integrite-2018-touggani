@@ -62,4 +62,12 @@ public class ControleurVainqueur {
 		System.out.println("ControleurVainqueur.notifierNaviguerAjouterVainqueur()");
 		this.navigateur.naviguerVersVueAjouterVainqueur();
 	}
+	
+	public void notifierNaviguerEditerVainqueur()
+	{
+		System.out.println("ControleurVainqueur.notifierEditerVainqueur()");
+		this.navigateur.naviguerVersVueEditerVainqueur();
+		
+	}
+
 }

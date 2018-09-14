@@ -10,6 +10,7 @@ import action.ControleurVainqueur;
 	
 	private Stage stade;
 	private VueAjouterVainqueur vueAjouterVainqueur = null;
+	private VueEditerVainqueur vueEditerVainqueur = null;
 	private VueListeVainqueur vueListeVainqueur = null;
 	private VueVainqueurs vueVainqueur = null;
 	private ControleurVainqueur controleur = null;
@@ -17,6 +18,7 @@ import action.ControleurVainqueur;
 	public NavigateurDesVues() 
 	{
 		this.vueAjouterVainqueur = new VueAjouterVainqueur();
+		this.vueEditerVainqueur = new VueEditerVainqueur();
 		this.vueListeVainqueur = new VueListeVainqueur();
 		this.vueVainqueur = new VueVainqueurs();
 	}
@@ -30,6 +32,7 @@ import action.ControleurVainqueur;
 		this.controleur = ControleurVainqueur.getInstance(); 
 		this.controleur.activerVues(this);
 		this.vueAjouterVainqueur.setControleur(controleur);
+		this.vueEditerVainqueur.setControleur(controleur);
 		this.vueListeVainqueur.setControleur(controleur);
 		this.vueVainqueur.setControleur(controleur);
 
@@ -37,6 +40,9 @@ import action.ControleurVainqueur;
 		
 		public VueAjouterVainqueur getVueAjouterVainqueur() {
 			return vueAjouterVainqueur;
+		}
+		public VueEditerVainqueur getVueEditerVainqueur() {
+			return this.vueEditerVainqueur;
 		}
 	 	public VueListeVainqueur getVueListeVainqueur() {
 			return vueListeVainqueur;
@@ -53,6 +59,11 @@ import action.ControleurVainqueur;
 		public void naviguerVersVueAjouterVainqueur()
 		{
 			stade.setScene(this.vueAjouterVainqueur);
+			stade.show();				
+		}
+		public void naviguerVersVueEditerVainqueur()
+		{
+			stade.setScene(this.vueEditerVainqueur);
 			stade.show();				
 		}
 		

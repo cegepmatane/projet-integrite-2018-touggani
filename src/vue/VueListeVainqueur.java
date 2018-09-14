@@ -31,9 +31,16 @@ import javafx.scene.control.Button;
 			this.grilleVainqueurs.add(new Label("Date"), 1, numero);
 			for(Vainqueur vainqueur : listeVainqueurs)
 			{
+				Button actionEditerVainqueur = new Button("Editer");
+				actionEditerVainqueur.setOnAction(new EventHandler<ActionEvent>() {
+					@Override
+					public void handle(ActionEvent arg0) {
+						controleur.notifierNaviguerEditerVainqueur();
+					}});
 				numero++;
 				this.grilleVainqueurs.add(new Label(vainqueur.getNomEquipe()), 0, numero);
-				this.grilleVainqueurs.add(new Label(vainqueur.getDate()), 1, numero);				
+				this.grilleVainqueurs.add(new Label(vainqueur.getDate()), 1, numero);
+				this.grilleVainqueurs.add(actionEditerVainqueur, 2, numero);
 			}
 			
 			this.actionNaviguerAjouterVainqueur.setOnAction(new EventHandler<ActionEvent>() 
