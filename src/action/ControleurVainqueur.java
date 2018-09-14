@@ -5,6 +5,8 @@ import vue.VueListeVainqueur;
 import vue.VueVainqueurs;
 import java.util.List;
 import vue.VueEditerVainqueur;
+import java.util.ArrayList;
+import modele.Distinction;
 
 import donnee.VainqueurDAO;
 import modele.Vainqueur;
@@ -43,6 +45,16 @@ public class ControleurVainqueur {
 		
 		this.navigateur.naviguerVersVueListeVainqueur();	
 		//this.navigateur.naviguerVersVueAjouterVainqueur();
+		
+		
+		List<Distinction> listeDistinctions = new ArrayList<Distinction>();
+		Distinction prix;
+		prix = new Distinction(2015, "Meilleur equipe");
+		listeDistinctions.add(prix);
+		prix = new Distinction(2016, "Meilleur entraineur");
+		listeDistinctions.add(prix);
+
+		this.vueEditerVainqueur.afficherListeDistinction(listeDistinctions);
 
 	}
 	
