@@ -34,8 +34,8 @@ import javafx.scene.control.Button;
 				Button actionEditerVainqueur = new Button("Editer");
 				actionEditerVainqueur.setOnAction(new EventHandler<ActionEvent>() {
 					@Override
-					public void handle(ActionEvent arg0) {
-						controleur.notifierNaviguerEditerVainqueur();
+					public void handle(ActionEvent a) {
+						controleur.notifierNaviguerEditerVainqueur(vainqueur.getId());
 					}});
 				numero++;
 				this.grilleVainqueurs.add(new Label(vainqueur.getNomEquipe()), 0, numero);

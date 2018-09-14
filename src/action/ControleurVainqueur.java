@@ -4,6 +4,7 @@ import vue.VueAjouterVainqueur;
 import vue.VueListeVainqueur;
 import vue.VueVainqueurs;
 import java.util.List;
+import vue.VueEditerVainqueur;
 
 import donnee.VainqueurDAO;
 import modele.Vainqueur;
@@ -12,22 +13,25 @@ public class ControleurVainqueur {
 	
 	private NavigateurDesVues navigateur;
 	private VueAjouterVainqueur vueAjouterVainqueur = null;
+	private VueEditerVainqueur vueEditerVainqueur = null;
 	private VueListeVainqueur vueListeVainqueur = null;
 	private VueVainqueurs vueVainqueur = null;
 	
 	VainqueurDAO vainqueurDAO = null;
 		
-	public ControleurVainqueur()
+	private ControleurVainqueur()
 	{
 		System.out.println("Initialisation du controleur");
 		this.vainqueurDAO = new VainqueurDAO();
 	}
+	
 	public void activerVues(NavigateurDesVues navigateur)
 	{
 		this.navigateur = navigateur;
 		this.vueAjouterVainqueur = navigateur.getVueAjouterVainqueur();
 		this.vueVainqueur = navigateur.getVueVainqueur();
 		this.vueListeVainqueur = navigateur.getVueListeVainqueur();
+		this.vueEditerVainqueur = navigateur.getVueEditerVainqueur();
 		
 		Vainqueur vainqueur = new Vainqueur("Liverpool", "18 Juin 1985", "Kloop", "Salah");
 		this.vueVainqueur.afficherVainqueur(vainqueur);
@@ -63,9 +67,10 @@ public class ControleurVainqueur {
 		this.navigateur.naviguerVersVueAjouterVainqueur();
 	}
 	
-	public void notifierNaviguerEditerVainqueur()
+	public void notifierNaviguerEditerVainqueur(int idVainqueur)
 	{
-		System.out.println("ControleurVainqueur.notifierEditerVainqueur()");
+		System.out.println("ControleurVainqueur.notifierEditerVainqueur("+idVainqueur+")");
+		this.vueEditerVainqueur.afficherVainqueur(this.vainqueurDAO.rapporterVainqueur(idVainqueur));
 		this.navigateur.naviguerVersVueEditerVainqueur();
 		
 	}

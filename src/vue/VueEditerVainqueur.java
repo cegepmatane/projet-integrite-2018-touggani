@@ -55,6 +55,14 @@ public class VueEditerVainqueur extends Scene {
 		panneau.getChildren().add(this.actionEnregistrerVainqueur);
 	}
 	
+	public void afficherVainqueur(Vainqueur vainqueur)
+	{
+		this.valeurNomEquipe.setText(vainqueur.getNomEquipe());
+		this.valeurDate.setText(vainqueur.getDate());
+		this.valeurEntraineur.setText(vainqueur.getEntraineur());
+		this.valeurCapitaine.setText(vainqueur.getCapitaine());
+	}
+	
 	public Vainqueur demanderVainqueur()
 	{
 		Vainqueur vainqueur = new Vainqueur(this.valeurNomEquipe.getText(), 

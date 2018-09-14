@@ -2,12 +2,18 @@ package modele;
 
 
 public class Vainqueur {
+	protected int id;
  	protected String nomEquipe;
 	protected String entraineur;
 	protected String date;
 	protected String capitaine;
 	
-	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public Vainqueur(String nomEquipe) {
 		super();
 		this.nomEquipe = nomEquipe;

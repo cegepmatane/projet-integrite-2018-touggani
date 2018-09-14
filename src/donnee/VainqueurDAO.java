@@ -51,12 +51,14 @@ public class VainqueurDAO {
 			ResultSet curseurListeVainqueur = requeteListeVainqueur.executeQuery("SELECT * FROM vainqueur");
 			while(curseurListeVainqueur.next())
 			{
+				int id = curseurListeVainqueur.getInt("id");
 				String nomEquipe = curseurListeVainqueur.getString("nomEquipe");
 				String date = curseurListeVainqueur.getString("date");
 				String entraineur = curseurListeVainqueur.getString("entraineur");
 				String capitaine = curseurListeVainqueur.getString("capitaine");
 				System.out.println("Vainqueur " + nomEquipe + " a gagné le " + date + " avec le coach " + entraineur + " et avec le capitaine " + capitaine);
 				Vainqueur vainqueur = new Vainqueur(nomEquipe, date, entraineur, capitaine);
+				vainqueur.setId(id);
 				listeVainqueur.add(vainqueur);
 			}
 		} catch (SQLException e) {
@@ -80,4 +82,28 @@ public class VainqueurDAO {
 		}
 		
 	}
+	
+	public Vainqueur rapporterVainqueur(int idVainqueur)
+	{
+		Statement requeteVainqueur;
+		try {
+			requeteVainqueur = connection.createStatement();
+			String SQL_RAPPORTER_VAINQUEUR = "SELECT * FROM vainqueur WHERE id = " + idVainqueur;
+			System.out.println(SQL_RAPPORTER_VAINQUEUR);
+			ResultSet curseurVainqueur = requeteVainqueur.executeQuery(SQL_RAPPORTER_VAINQUEUR);
+			curseurVainqueur.next();
+			int id = curseurVainqueur.getInt("id");
+			String nomEquipe = curseurVainqueur.getString("nomEquipe");
+			String date = curseurVainqueur.getString("date");
+			String entraineur = curseurVainqueur.getString("entraineur");
+			String capitaine = curseurVainqueur.getString("capitaine");
+			System.out.println("Vainqueur " + nomEquipe + " a gagné le " + date + " avec " + entraineur + " comme entraineur et le capitaine " + capitaine);
+			Vainqueur vainqueur = new Vainqueur(nomEquipe, date, entraineur, capitaine);
+			vainqueur.setId(id);
+			return vainqueur;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+}
 }
