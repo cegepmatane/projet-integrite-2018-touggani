@@ -49,7 +49,7 @@ public class ControleurVainqueur {
 		this.navigateur.naviguerVersVueListeVainqueur();	
 		//this.navigateur.naviguerVersVueAjouterVainqueur();
 
-		this.vueEditerVainqueur.afficherListeDistinction(this.distinctionDAO.simulerListeDistinctions());
+		//this.vueEditerVainqueur.afficherListeDistinction(this.distinctionDAO.listerDistinctions());
 
 	}
 	
@@ -88,6 +88,7 @@ public class ControleurVainqueur {
 	{
 		System.out.println("ControleurVainqueur.notifierEditerVainqueur("+idVainqueur+")");
 		this.vueEditerVainqueur.afficherVainqueur(this.vainqueurDAO.rapporterVainqueur(idVainqueur));
+		this.vueEditerVainqueur.afficherListeDistinction(this.distinctionDAO.listerDistinctions(idVainqueur));
 		this.navigateur.naviguerVersVueEditerVainqueur();
 		
 	}
