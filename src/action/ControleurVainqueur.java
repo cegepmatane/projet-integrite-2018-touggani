@@ -7,6 +7,7 @@ import java.util.List;
 import vue.VueEditerVainqueur;
 import java.util.ArrayList;
 import modele.Distinction;
+import donnee.DistinctionDAO;
 
 import donnee.VainqueurDAO;
 import modele.Vainqueur;
@@ -18,6 +19,7 @@ public class ControleurVainqueur {
 	private VueEditerVainqueur vueEditerVainqueur = null;
 	private VueListeVainqueur vueListeVainqueur = null;
 	private VueVainqueurs vueVainqueur = null;
+	DistinctionDAO distinctionDAO = null;
 	
 	VainqueurDAO vainqueurDAO = null;
 		
@@ -25,6 +27,7 @@ public class ControleurVainqueur {
 	{
 		System.out.println("Initialisation du controleur");
 		this.vainqueurDAO = new VainqueurDAO();
+		distinctionDAO = new DistinctionDAO();
 	}
 	
 	public void activerVues(NavigateurDesVues navigateur)
@@ -45,16 +48,8 @@ public class ControleurVainqueur {
 		
 		this.navigateur.naviguerVersVueListeVainqueur();	
 		//this.navigateur.naviguerVersVueAjouterVainqueur();
-		
-		
-		List<Distinction> listeDistinctions = new ArrayList<Distinction>();
-		Distinction prix;
-		prix = new Distinction(2015, "Meilleur equipe");
-		listeDistinctions.add(prix);
-		prix = new Distinction(2016, "Meilleur entraineur");
-		listeDistinctions.add(prix);
 
-		this.vueEditerVainqueur.afficherListeDistinction(listeDistinctions);
+		this.vueEditerVainqueur.afficherListeDistinction(this.distinctionDAO.simulerListeDistinctions());
 
 	}
 	
