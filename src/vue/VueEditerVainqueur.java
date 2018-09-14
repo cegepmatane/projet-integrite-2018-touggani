@@ -20,6 +20,8 @@ public class VueEditerVainqueur extends Scene {
 	private ControleurVainqueur controleur = null;
 	protected Button actionEnregistrerVainqueur = null;
 	
+	private int idVainqueur = 0;
+	
 	public VueEditerVainqueur()  {
 		super(new VBox(), 400, 400);
 		VBox panneau = (VBox) this.getRoot();
@@ -57,6 +59,7 @@ public class VueEditerVainqueur extends Scene {
 	
 	public void afficherVainqueur(Vainqueur vainqueur)
 	{
+		this.idVainqueur = vainqueur.getId();
 		this.valeurNomEquipe.setText(vainqueur.getNomEquipe());
 		this.valeurDate.setText(vainqueur.getDate());
 		this.valeurEntraineur.setText(vainqueur.getEntraineur());
@@ -69,6 +72,7 @@ public class VueEditerVainqueur extends Scene {
 								this.valeurDate.getText(), 
 								this.valeurEntraineur.getText(), 
 								this.valeurCapitaine.getText());
+		vainqueur.setId(idVainqueur);
 		return vainqueur;
 	}
 	

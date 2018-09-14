@@ -83,6 +83,19 @@ public class VainqueurDAO {
 		
 	}
 	
+	public void modifierVainqueur(Vainqueur vainqueur)
+	{
+		System.out.println("VainqueurDAO.modifierVainqueur()");
+		try {
+			Statement requeteModifierVainqueur = connection.createStatement();
+			String SQL_MODIFIER_VAINQUEUR = "UPDATE vainqueur SET nom = '"+vainqueur.getNomEquipe()+"', couleur = '"+vainqueur.getDate()+"', poids = '"+vainqueur.getEntraineur()+"', naissance = '"+vainqueur.getCapitaine()+"' WHERE id = " + vainqueur.getId();
+			System.out.println("SQL : " + SQL_MODIFIER_VAINQUEUR);
+			requeteModifierVainqueur.execute(SQL_MODIFIER_VAINQUEUR);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public Vainqueur rapporterVainqueur(int idVainqueur)
 	{
 		Statement requeteVainqueur;

@@ -31,7 +31,7 @@ import javafx.event.EventHandler;
  			@Override
 			public void handle(ActionEvent arg0) {
 				
-				controleur.notifierEnregistrerVainqueur();
+				controleur.notifierEnregistrerNouveauVainqueur();
 				
 			}});
 		
