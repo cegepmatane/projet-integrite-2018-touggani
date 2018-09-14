@@ -1,4 +1,6 @@
 package vue;
+import java.util.ArrayList;
+import java.util.List;
 import action.ControleurVainqueur;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -9,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import modele.Vainqueur;
+import modele.Distinction;
 
 
 public class VueEditerVainqueur extends Scene {
@@ -54,11 +57,23 @@ public class VueEditerVainqueur extends Scene {
 		grilleVainqueur.add(new Label("Capitaine : "), 0, 3);
 		grilleVainqueur.add(valeurCapitaine, 1, 3);				
 		
-		this.grilleListeDistinctions.add(new Label("Distinction 1"), 0, 0);
-		this.grilleListeDistinctions.add(new Label("Distinction 2"), 0, 1);
-		this.grilleListeDistinctions.add(new Label("Distinction 3"), 0, 2);
-		this.grilleListeDistinctions.add(new Label("Distinction 4"), 0, 3);
+		List<Distinction> listeDistinctions = new ArrayList<Distinction>();
+		Distinction prix;
+		prix = new Distinction(2015, "Meilleur equipe");
+		listeDistinctions.add(prix);
+		prix = new Distinction(2016, "Meilleur jeune");
+		listeDistinctions.add(prix);
 
+ 		int item = 0;
+		for(Distinction distinction : listeDistinctions)
+		{
+			this.grilleListeDistinctions.add(new Label(distinction.getAnnee() + ""), 0, item);
+			this.grilleListeDistinctions.add(new Label(distinction.getTitre()), 1, item);
+			this.grilleListeDistinctions.add(new Button("Éditer"), 2, item);
+			this.grilleListeDistinctions.add(new Button("Effacer"), 3, item);
+			item++;
+		}
+		
 		panneau.getChildren().add(new Label("Editer un vainqueur"));
 		panneau.getChildren().add(grilleVainqueur);
 		panneau.getChildren().add(this.actionEnregistrerVainqueur);
