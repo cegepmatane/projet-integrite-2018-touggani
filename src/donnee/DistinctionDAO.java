@@ -11,9 +11,9 @@ import modele.Vainqueur;
  
  public class DistinctionDAO {
 	private static String BASEDEDONNEES_DRIVER = "org.postgresql.Driver";
-	private static String BASEDEDONNEES_URL = "jdbc:postgresql://localhost:5432/competition";
+	private static String BASEDEDONNEES_URL = "jdbc:postgresql://localhost:5432/Competition";
 	private static String BASEDEDONNEES_USAGER = "postgres";
-	private static String BASEDEDONNEES_MOTDEPASSE = "test";	
+	private static String BASEDEDONNEES_MOTDEPASSE = "root";	
 	private Connection connection = null;
  	public DistinctionDAO()
 	{
@@ -63,7 +63,11 @@ import modele.Vainqueur;
 		Distinction prix;
 		prix = new Distinction(2015, "Meilleur equipe");
 		listeDistinctions.add(prix);
-		prix = new Distinction(2016, "Le plus de but");
+		prix = new Distinction(2016, "Equipe a prendre le moins de but");
+		listeDistinctions.add(prix);
+		prix = new Distinction(2016, "Equipe a mettre le plus de but");
+		listeDistinctions.add(prix);
+		prix = new Distinction(2016, "Meilleur entraineur de la competition");
 		listeDistinctions.add(prix);
 
 		

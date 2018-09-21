@@ -57,11 +57,34 @@ public class VueEditerVainqueur extends Scene {
 		grilleVainqueur.add(new Label("Capitaine : "), 0, 3);
 		grilleVainqueur.add(valeurCapitaine, 1, 3);				
 		
+		List<Distinction> listeDistinctions = new ArrayList<Distinction>();
+ 		Distinction prix;
+ 		prix = new Distinction(2015, "Meilleur equipe");
+ 		listeDistinctions.add(prix);
+ 		prix = new Distinction(2016, "Equipe a prendre le moins de but");
+ 		listeDistinctions.add(prix);
+ 		prix = new Distinction(2017, "Equipe a mettre le plus de but");
+ 		listeDistinctions.add(prix);
+		prix = new Distinction(2018, "Meilleur entraineur de la competition");
+		listeDistinctions.add(prix);
+		this.afficherListeDistinction(listeDistinctions);
 		panneau.getChildren().add(new Label("Editer un vainqueur"));
 		panneau.getChildren().add(grilleVainqueur);
-		panneau.getChildren().add(this.actionEnregistrerVainqueur);
-		panneau.getChildren().add(grilleListeDistinctions);
 
+	}
+	
+	public void afficherListeDistinction(List<Distinction> listeDistinctions)
+	{
+		
+		int item = 0;
+		for(Distinction distinction : listeDistinctions)
+		{
+			this.grilleListeDistinctions.add(new Label(distinction.getAnnee() + ""), 0, item);
+			this.grilleListeDistinctions.add(new Label(distinction.getTitre()), 1, item);
+			this.grilleListeDistinctions.add(new Button("Éditer"), 2, item);
+			this.grilleListeDistinctions.add(new Button("Effacer"), 3, item);
+			item++;
+		}
 	}
 	
 	public void afficherVainqueur(Vainqueur vainqueur)
@@ -73,18 +96,6 @@ public class VueEditerVainqueur extends Scene {
 		this.valeurCapitaine.setText(vainqueur.getCapitaine());
 	}
 	
-	public void afficherListeDistinction(List<Distinction> listeDistinctions)
-	{
-		int item = 0;
-		for(Distinction distinction : listeDistinctions)
-		{
-			this.grilleListeDistinctions.add(new Label(distinction.getAnnee() + ""), 0, item);
-			this.grilleListeDistinctions.add(new Label(distinction.getTitre()), 1, item);
-			this.grilleListeDistinctions.add(new Button("Éditer"), 2, item);
-			this.grilleListeDistinctions.add(new Button("Effacer"), 3, item);
-			item++;
-		}
-	}
 	
 	public Vainqueur demanderVainqueur()
 	{

@@ -11,7 +11,6 @@ import java.sql.Statement;
 
 
 public class VainqueurDAO {
-
 	private List<Vainqueur> simulerListerVainqueur()
 	{
 		List<Vainqueur> listeVainqueurTest = new ArrayList<Vainqueur>();
