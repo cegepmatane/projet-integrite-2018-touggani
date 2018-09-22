@@ -11,7 +11,7 @@ import java.sql.Statement;
 
 
 
-public class VainqueurDAO {
+public class VainqueurDAO implements VainqueurSQL {
 	
 	private Connection connection = null;
 	
@@ -35,7 +35,7 @@ public class VainqueurDAO {
 		Statement requeteListeVainqueur;
 		try {
 			requeteListeVainqueur = connection.createStatement();
-			ResultSet curseurListeVainqueur = requeteListeVainqueur.executeQuery("SELECT * FROM vainqueur");
+			ResultSet curseurListeVainqueur = requeteListeVainqueur.executeQuery(SQL_LISTER_VAINQUEUR);
 			while(curseurListeVainqueur.next())
 			{
 				int id = curseurListeVainqueur.getInt("id");
@@ -59,8 +59,7 @@ public class VainqueurDAO {
 	{
 		System.out.println("VainqueurDAO.ajouterVainqueur()");
 		try {
-			String SQL_AJOUTER_VAINQUEUR = "INSERT into mouton(nomEquipe, date, entraineur, capitaine) VALUES(?,?,?,?)";
-			PreparedStatement requeteAjouterVainqueur = connection.prepareStatement(SQL_AJOUTER_MOUTON);
+			PreparedStatement requeteAjouterVainqueur = connection.prepareStatement(SQL_AJOUTER_VAINQUEUR);
 			requeteAjouterVainqueur.setString(1, vainqueur.getNomEquipe());
 			requeteAjouterVainqueur.setString(2, vainqueur.getDate());
 			requeteAjouterVainqueur.setString(3, vainqueur.getEntraineur());
@@ -79,7 +78,6 @@ public class VainqueurDAO {
 	{
 		System.out.println("VainqueurDAO.modifierVainqueur()");
 		try {
-			String SQL_MODIFIER_VAINQUEUR = "UPDATE mouton SET nom = ?, couleur = ?, poids = ?, naissance = ? WHERE id = ?";
 			PreparedStatement requeteModifierVainqueur = connection.prepareStatement(SQL_MODIFIER_VAINQUEUR);
 			requeteModifierVainqueur.setString(1, vainqueur.getNomEquipe());
 			requeteModifierVainqueur.setString(2, vainqueur.getDate());
@@ -97,7 +95,6 @@ public class VainqueurDAO {
 	{
 		PreparedStatement requeteVainqueur;
 		try {
-			String SQL_RAPPORTER_VAINQUEUR = "SELECT * FROM mouton WHERE id = ?";
 			requeteVainqueur = connection.prepareStatement(SQL_RAPPORTER_VAINQUEUR);
 			requeteVainqueur.setInt(1, idVainqueur);
 

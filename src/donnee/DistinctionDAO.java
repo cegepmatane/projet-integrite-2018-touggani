@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import modele.Vainqueur;
  
- public class DistinctionDAO {
+ public class DistinctionDAO implements DistinctionSQL {
 	private Connection connection = null;
 	
 	
@@ -24,7 +24,6 @@ import modele.Vainqueur;
 		System.out.println("DistinctionDAO.listerDistinctions()");
 		List<Distinction> listeDistinctions =  new ArrayList<Distinction>();			
 		PreparedStatement requeteListeDistinctions;
-		String SQL_LISTER_DISTINCTIONS_PAR_VAINQUEUR = "SELECT * FROM distinction WHERE vainqueur = ?";
 		try {
 			requeteListeDistinctions = connection.prepareStatement(SQL_LISTER_DISTINCTIONS_PAR_VAINQUEUR);
 			requeteListeDistinctions.setInt(1, idVainqueur);

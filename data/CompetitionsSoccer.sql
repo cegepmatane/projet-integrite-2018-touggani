@@ -33,8 +33,51 @@ SET row_security = off;
 --
  COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
  SET search_path = public, pg_catalog;
+ 
+ --
+-- Name: journaliser(); Type: FUNCTION; Schema: public; Owner: postgres
+--
+ CREATE FUNCTION journaliser() RETURNS void
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+	INSERT into journal(moment, operation, objet, description) VALUES(NOW(), 'AJOUTER', 'vainqueur', '{Dolly, 2016-06-01}');
+END
+$$;
+ ALTER FUNCTION public.journaliser() OWNER TO postgres;
+
+ 
  SET default_tablespace = '';
  SET default_with_oids = false;
+ ALTER SEQUENCE distinction_id_seq OWNED BY distinction.id;
+ 
+ 
+ --
+-- Name: journal; Type: TABLE; Schema: public; Owner: postgres
+--
+ CREATE TABLE journal (
+    id integer NOT NULL,
+    moment timestamp with time zone NOT NULL,
+    operation text NOT NULL,
+    description text,
+    objet text NOT NULL
+);
+ ALTER TABLE journal OWNER TO postgres;
+ --
+-- Name: journal_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+ CREATE SEQUENCE journal_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+ ALTER TABLE journal_id_seq OWNER TO postgres;
+ --
+-- Name: journal_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+ ALTER SEQUENCE journal_id_seq OWNED BY journal.id;
+
  
  --
 -- Name: distinction; Type: TABLE; Schema: public; Owner: postgres
@@ -44,7 +87,7 @@ SET row_security = off;
     annee integer,
     titre text,
     detail text,
-    mouton integer
+    vainqueur integer
 );
  ALTER TABLE distinction OWNER TO postgres;
  --
@@ -95,7 +138,16 @@ SET row_security = off;
 --
  ALTER TABLE ONLY distinction ALTER COLUMN id SET DEFAULT nextval('distinction_id_seq'::regclass);
 
+ --
+-- Name: journal id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+ ALTER TABLE ONLY journal ALTER COLUMN id SET DEFAULT nextval('journal_id_seq'::regclass);
  
+ 
+ INSERT INTO distinction VALUES (1, 2017, 'Meilleur equipe', NULL, 2);
+INSERT INTO distinction VALUES (2, 2015, 'Equipe a prendre le moins de but', NULL, 2);
+INSERT INTO distinction VALUES (3, 2016, 'Equipe a mettre le plus de but', NULL, 1);
+INSERT INTO distinction VALUES (4, 2016, 'Meilleur entraineur de la competition', NULL, 2);
  
  --
 -- Name: vainqueur id; Type: DEFAULT; Schema: public; Owner: postgres
@@ -109,7 +161,16 @@ SET row_security = off;
  --
 -- Name: distinction_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
- SELECT pg_catalog.setval('distinction_id_seq', 1, false);
+ SELECT pg_catalog.setval('distinction_id_seq', 4, true);
+ 
+ --
+-- Data for Name: journal; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+ INSERT INTO journal VALUES (1, '2018-09-20 10:30:34.923266-04', 'AJOUTER', '{Dolly, 2016-06-01}', 'mouton');
+ --
+-- Name: journal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+ SELECT pg_catalog.setval('journal_id_seq', 1, true);
 
  
  --
@@ -122,27 +183,31 @@ SET row_security = off;
 
 INSERT INTO vainqueur VALUES ('Real', '11 Mai 2013', 'Makelele', 'Benzema', 1);
 INSERT INTO vainqueur VALUES ('Bayern', '25 Juin 2011', 'Guardiola', 'Robben', 2);
-INSERT INTO mouton VALUES ('Coucou', 'Noir', '5', '2016', 6);
+INSERT INTO vainqueur VALUES ('Coucou', 'Noir', '5', '2016', 6);
 
  --
 -- Name: vainqueur_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
- SELECT pg_catalog.setval('vainqueur_id_seq', 13, true);
+ SELECT pg_catalog.setval('vainqueur_id_seq', 14, true);
 
 ALTER TABLE ONLY distinction
     ADD CONSTRAINT distinction_pkey PRIMARY KEY (id);
     ADD CONSTRAINT vainqueur_pkey PRIMARY KEY (id);
 	
 	
+ALTER TABLE ONLY journal
+    ADD CONSTRAINT journal_pkey PRIMARY KEY (id);
+	
+	
 	--
--- Name: fki_one_mouton_to_many_distinction; Type: INDEX; Schema: public; Owner: postgres
+-- Name: fki_one_vainqueur_to_many_distinction; Type: INDEX; Schema: public; Owner: postgres
 --
- CREATE INDEX fki_one_mouton_to_many_distinction ON distinction USING btree (mouton);
+ CREATE INDEX fki_one_vainqueur_to_many_distinction ON distinction USING btree (vainqueur);
  --
--- Name: distinction one_mouton_to_many_distinction; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: distinction one_vainqueur_to_many_distinction; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
  ALTER TABLE ONLY distinction
-    ADD CONSTRAINT one_mouton_to_many_distinction FOREIGN KEY (mouton) REFERENCES mouton(id);
+    ADD CONSTRAINT one_vainqueur_to_many_distinction FOREIGN KEY (vainqueur) REFERENCES vainqueur(id);
 
  --
 -- PostgreSQL database dump complete
