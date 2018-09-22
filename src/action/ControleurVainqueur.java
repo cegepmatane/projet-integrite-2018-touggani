@@ -50,7 +50,19 @@ public class ControleurVainqueur {
 		//this.navigateur.naviguerVersVueAjouterVainqueur();
 
 		//this.vueEditerVainqueur.afficherListeDistinction(this.distinctionDAO.listerDistinctions());
-
+		
+		
+		List<Distinction> listeDistinctions = new ArrayList<Distinction>();
+		Distinction prix;
+		prix = new Distinction(2015, "Meilleur equipe");
+		listeDistinctions.add(prix);
+		prix = new Distinction(2016, "Equipe a prendre le moins de but");
+		listeDistinctions.add(prix);
+		prix = new Distinction(2017, "Equipe a mettre le plus de but");
+		listeDistinctions.add(prix);
+		prix = new Distinction(2018, "Meilleur entraineur de la competition");
+		listeDistinctions.add(prix);
+		this.vueEditerVainqueur.afficherListeDistinction(listeDistinctions);
 	}
 	
 	private static ControleurVainqueur instance = null;
