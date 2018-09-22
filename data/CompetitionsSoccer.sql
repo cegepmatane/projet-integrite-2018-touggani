@@ -48,17 +48,22 @@ DECLARE
 BEGIN
 	objetAvant := '';
 	objetApres := '';
-     -- cas de modifier ou supprimer 
-    -- IF OLD is not NULL THEN
-	--     	objetAvant := '{'||OLD.nom||','||OLD.couleur||','||OLD.naissance||'}';
-    -- END IF;
-    -- cas de modifier ou supprimer 
-    IF NEW is not NULL THEN
-	    	objetApres := '{'||NEW.nom||','||NEW.couleur||','||NEW.naissance||'}';
+    IF TG_OP = 'UPDATE' THEN
+    	objetAvant := '{'||OLD.nomEquipe||','||OLD.date||','||OLD.entraineur||'}';
+   		objetApres := '{'||NEW.nomEquipe||','||NEW.date||','||NEW.entraineur||'}';
+        operation := 'MODIFIER';
+    END IF;
+	IF TG_OP = 'INSERT' THEN
+   		objetApres := '{'||NEW.nomEquipe||','||NEW.date||','||NEW.entraineur||'}';
+        operation := 'AJOUTER';
+    END IF;
+	IF TG_OP = 'DELETE' THEN
+    	objetAvant := '{'||OLD.nomEquipe||','||OLD.date||','||OLD.entraineur||'}';
+        operation := 'EFFACER';
     END IF;
  	description := objetAvant || ' -> ' || objetApres;
     -- https://www.postgresql.org/docs/9.1/static/plpgsql-trigger.html
-	INSERT into journal(moment, operation, objet, description) VALUES(NOW(), TG_OP, 'mouton', description);
+	INSERT into journal(moment, operation, objet, description) VALUES(NOW(), operation, 'vainqueur', description);
 	return NEW;
 END
 $$;
@@ -196,7 +201,7 @@ INSERT INTO journal VALUES (17, '2018-09-20 11:30:33.415524-04', 'INSERT', ' -> 
  --
 -- Name: journal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
- SELECT pg_catalog.setval('journal_id_seq', 17, true);
+ SELECT pg_catalog.setval('journal_id_seq', 18, true);
 
  
  --
@@ -218,11 +223,12 @@ INSERT INTO mouton VALUES ('paris', 'Mars', 'Emery', 'motta', 28);
 INSERT INTO mouton VALUES ('paris', 'Mars', 'Emery', 'motta', 31);
 INSERT INTO mouton VALUES ('paris', 'Mars', 'Emery', 'motta', 33);
 INSERT INTO mouton VALUES ('paris', 'Mars', 'Emery', 'motta', 34);
+INSERT INTO mouton VALUES ('paris', 'Mars', 'Emery', 'motta', 36);
 
  --
 -- Name: vainqueur_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
- SELECT pg_catalog.setval('vainqueur_id_seq', 35, true);
+ SELECT pg_catalog.setval('vainqueur_id_seq', 36, true);
 
 ALTER TABLE ONLY distinction
     ADD CONSTRAINT distinction_pkey PRIMARY KEY (id);
