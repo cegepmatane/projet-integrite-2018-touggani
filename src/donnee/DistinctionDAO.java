@@ -58,7 +58,7 @@ import modele.Vainqueur;
 		return listeDistinctions;
 	}	
 	
-	public List<Distinction> simulerListerDistinctions(){
+	public List<Distinction> simulerListeDistinctions(){
 		List<Distinction> listeDistinctions = new ArrayList<Distinction>();
 		Distinction prix;
 		prix = new Distinction(2015, "Meilleur equipe");

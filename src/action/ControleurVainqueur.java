@@ -1,5 +1,6 @@
 package action;
 import vue.NavigateurDesVues;
+import donnee.DistinctionDAO;
 import vue.VueAjouterVainqueur;
 import vue.VueListeVainqueur;
 import vue.VueVainqueurs;
@@ -52,7 +53,7 @@ public class ControleurVainqueur {
 		//this.vueEditerVainqueur.afficherListeDistinction(this.distinctionDAO.listerDistinctions());
 		
 		
-		List<Distinction> listeDistinctions = new ArrayList<Distinction>();
+		/*List<Distinction> listeDistinctions = new ArrayList<Distinction>();
 		Distinction prix;
 		prix = new Distinction(2015, "Meilleur equipe");
 		listeDistinctions.add(prix);
@@ -62,7 +63,9 @@ public class ControleurVainqueur {
 		listeDistinctions.add(prix);
 		prix = new Distinction(2018, "Meilleur entraineur de la competition");
 		listeDistinctions.add(prix);
-		this.vueEditerVainqueur.afficherListeDistinction(listeDistinctions);
+		this.vueEditerVainqueur.afficherListeDistinction(listeDistinctions);*/
+		this.vueEditerVainqueur.afficherListeDistinction(this.distinctionDAO.simulerListeDistinctions());
+
 	}
 	
 	private static ControleurVainqueur instance = null;
