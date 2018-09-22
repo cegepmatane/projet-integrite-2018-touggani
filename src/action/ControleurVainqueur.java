@@ -20,10 +20,8 @@ public class ControleurVainqueur {
 	private VueEditerVainqueur vueEditerVainqueur = null;
 	private VueListeVainqueur vueListeVainqueur = null;
 	private VueVainqueurs vueVainqueur = null;
-	DistinctionDAO distinctionDAO = null;
-	
-	VainqueurDAO vainqueurDAO = null;
-		
+
+
 	private ControleurVainqueur()
 	{
 		System.out.println("Initialisation du controleur");
@@ -64,7 +62,8 @@ public class ControleurVainqueur {
 		prix = new Distinction(2018, "Meilleur entraineur de la competition");
 		listeDistinctions.add(prix);
 		this.vueEditerVainqueur.afficherListeDistinction(listeDistinctions);*/
-		this.vueEditerVainqueur.afficherListeDistinction(this.distinctionDAO.listerDistinctions());
+		
+		//this.vueEditerVainqueur.afficherListeDistinction(this.distinctionDAO.listerDistinctions());
 
 	}
 	
