@@ -1,4 +1,5 @@
 package donnee;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -84,12 +85,15 @@ public class VainqueurDAO {
 	
 	public Vainqueur rapporterVainqueur(int idVainqueur)
 	{
-		Statement requeteVainqueur;
+		PreparedStatement requeteVainqueur;
 		try {
-			requeteVainqueur = connection.createStatement();
-			String SQL_RAPPORTER_VAINQUEUR = "SELECT * FROM vainqueur WHERE id = " + idVainqueur;
+			String SQL_RAPPORTER_VAINQUEUR = "SELECT * FROM mouton WHERE id = ?";
+			requeteVainqueur = connection.prepareStatement(SQL_RAPPORTER_VAINQUEUR);
+			requeteVainqueur.setInt(1, idVainqueur);
+
 			System.out.println(SQL_RAPPORTER_VAINQUEUR);
-			ResultSet curseurVainqueur = requeteVainqueur.executeQuery(SQL_RAPPORTER_VAINQUEUR);
+			ResultSet curseurVainqueur = requeteVainqueur.executeQuery();
+
 			curseurVainqueur.next();
 			int id = curseurVainqueur.getInt("id");
 			String nomEquipe = curseurVainqueur.getString("nomEquipe");
