@@ -59,10 +59,15 @@ public class VainqueurDAO {
 	{
 		System.out.println("VainqueurDAO.ajouterVainqueur()");
 		try {
-			Statement requeteAjouterVainqueur = connection.createStatement();
-			String sqlAjouterVainqueur = "INSERT into vainqueur (date, entraineur, capitaine, nomEquipe) VALUES ('"+vainqueur.getDate()+"','"+vainqueur.getEntraineur()+"','"+vainqueur.getCapitaine()+"','"+vainqueur.getNomEquipe()+"')";
-			System.out.println("SQL : " + sqlAjouterVainqueur);	
-			requeteAjouterVainqueur.execute(sqlAjouterVainqueur);
+			String SQL_AJOUTER_VAINQUEUR = "INSERT into mouton(nomEquipe, date, entraineur, capitaine) VALUES(?,?,?,?)";
+			PreparedStatement requeteAjouterVainqueur = connection.prepareStatement(SQL_AJOUTER_MOUTON);
+			requeteAjouterVainqueur.setString(1, vainqueur.getNomEquipe());
+			requeteAjouterVainqueur.setString(2, vainqueur.getDate());
+			requeteAjouterVainqueur.setString(3, vainqueur.getEntraineur());
+			requeteAjouterVainqueur.setString(4, vainqueur.getCapitaine());
+			
+			System.out.println("SQL : " + SQL_AJOUTER_VAINQUEUR);
+			requeteAjouterVainqueur.execute();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
