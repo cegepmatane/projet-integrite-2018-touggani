@@ -58,7 +58,36 @@ import modele.Vainqueur;
 		return listeDistinctions;
 	}	
 	
-	public List<Distinction> simulerListeDistinctions(){
+	public List<Distinction> listerDistinctions(){
+		System.out.println("DistinctionDAO.listerDistinctions()");
+		List<Distinction> listeDistinctions =  new ArrayList<Distinction>();			
+		Statement requeteListeDistinctions;
+		try {
+			requeteListeDistinctions = connection.createStatement();
+			ResultSet curseurListeDistinctions = requeteListeDistinctions.executeQuery("SELECT * FROM distinction WHERE vainqueur = 2");
+			while(curseurListeDistinctions.next())
+			{
+				int id = curseurListeDistinctions.getInt("id");
+				int annee = curseurListeDistinctions.getInt("annee");
+				String titre = curseurListeDistinctions.getString("titre");
+				String detail = curseurListeDistinctions.getString("detail");				
+				System.out.println("Distinction " + titre + " donnée en " + annee);
+				
+				Distinction distinction = new Distinction(annee, titre);
+				distinction.setDetail(detail);
+				distinction.setId(id);
+				listeDistinctions.add(distinction);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+				
+		//return this.simulerListerDistinctions();
+		return listeDistinctions;
+		}	
+		
+		public List<Distinction> simulerListerDistinctions()
+		
 		List<Distinction> listeDistinctions = new ArrayList<Distinction>();
 		Distinction prix;
 		prix = new Distinction(2015, "Meilleur equipe");

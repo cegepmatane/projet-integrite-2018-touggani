@@ -64,7 +64,7 @@ public class ControleurVainqueur {
 		prix = new Distinction(2018, "Meilleur entraineur de la competition");
 		listeDistinctions.add(prix);
 		this.vueEditerVainqueur.afficherListeDistinction(listeDistinctions);*/
-		this.vueEditerVainqueur.afficherListeDistinction(this.distinctionDAO.simulerListeDistinctions());
+		this.vueEditerVainqueur.afficherListeDistinction(this.distinctionDAO.listerDistinctions());
 
 	}
 	
