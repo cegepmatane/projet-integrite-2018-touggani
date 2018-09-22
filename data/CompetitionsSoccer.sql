@@ -37,11 +37,15 @@ SET row_security = off;
  --
 -- Name: journaliser(); Type: FUNCTION; Schema: public; Owner: postgres
 --
- CREATE FUNCTION journaliser() RETURNS void
+ CREATE FUNCTION journaliser() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
+DECLARE 
+	description text;
 BEGIN
-	INSERT into journal(moment, operation, objet, description) VALUES(NOW(), 'AJOUTER', 'vainqueur', '{Dolly, 2016-06-01}');
+	description := '{'|| NEW.nom ||'}';
+	INSERT into journal(moment, operation, objet, description) VALUES(NOW(), 'AJOUTER', 'vainqueur', description);
+	return NEW;
 END
 $$;
  ALTER FUNCTION public.journaliser() OWNER TO postgres;
@@ -166,11 +170,16 @@ INSERT INTO distinction VALUES (4, 2016, 'Meilleur entraineur de la competition'
  --
 -- Data for Name: journal; Type: TABLE DATA; Schema: public; Owner: postgres
 --
- INSERT INTO journal VALUES (1, '2018-09-20 10:30:34.923266-04', 'AJOUTER', '{Dolly, 2016-06-01}', 'mouton');
+ INSERT INTO journal VALUES (1, '2018-09-20 10:30:34.923266-04', 'AJOUTER', '{Paris, 2016-06-01}', 'vainqueur');
+ INSERT INTO journal VALUES (11, '2018-09-20 10:59:36.967935-04', 'AJOUTER', '{Manchester, 2016-06-01}', 'vainqueur');
+INSERT INTO journal VALUES (12, '2018-09-20 11:00:58.498813-04', 'AJOUTER', '{Madrid, 2016-06-01}', 'vainqueur');
+INSERT INTO journal VALUES (13, '2018-09-20 11:04:32.144692-04', 'AJOUTER', '{Bayern}', 'vainqueur');
+INSERT INTO journal VALUES (14, '2018-09-20 11:06:51.817885-04', 'AJOUTER', '{lille}', 'vainqueur');
+
  --
 -- Name: journal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
- SELECT pg_catalog.setval('journal_id_seq', 1, true);
+ SELECT pg_catalog.setval('journal_id_seq', 14, true);
 
  
  --
@@ -184,11 +193,16 @@ INSERT INTO distinction VALUES (4, 2016, 'Meilleur entraineur de la competition'
 INSERT INTO vainqueur VALUES ('Real', '11 Mai 2013', 'Makelele', 'Benzema', 1);
 INSERT INTO vainqueur VALUES ('Bayern', '25 Juin 2011', 'Guardiola', 'Robben', 2);
 INSERT INTO vainqueur VALUES ('Coucou', 'Noir', '5', '2016', 6);
+INSERT INTO mouton VALUES ('paris', 'Mars', 'Emery', 'motta', 24);
+INSERT INTO mouton VALUES ('paris', 'Mars', 'Emery', 'motta', 25);
+INSERT INTO mouton VALUES ('paris', 'Mars', 'Emery', 'motta', 26);
+INSERT INTO mouton VALUES ('paris', 'Mars', 'Emery', 'motta', 27);
+INSERT INTO mouton VALUES ('paris', 'Mars', 'Emery', 'motta', 28);
 
  --
 -- Name: vainqueur_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
- SELECT pg_catalog.setval('vainqueur_id_seq', 14, true);
+ SELECT pg_catalog.setval('vainqueur_id_seq', 29, true);
 
 ALTER TABLE ONLY distinction
     ADD CONSTRAINT distinction_pkey PRIMARY KEY (id);
@@ -203,6 +217,12 @@ ALTER TABLE ONLY journal
 -- Name: fki_one_vainqueur_to_many_distinction; Type: INDEX; Schema: public; Owner: postgres
 --
  CREATE INDEX fki_one_vainqueur_to_many_distinction ON distinction USING btree (vainqueur);
+ 
+ --
+-- Name: mouton evenementajoutvainqueur; Type: TRIGGER; Schema: public; Owner: postgres
+--
+ CREATE TRIGGER evenementajoutmouton BEFORE INSERT ON mouton FOR EACH ROW EXECUTE PROCEDURE journaliser();
+
  --
 -- Name: distinction one_vainqueur_to_many_distinction; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
