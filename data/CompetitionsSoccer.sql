@@ -54,11 +54,13 @@ BEGIN
         operation := 'MODIFIER';
     END IF;
 	IF TG_OP = 'INSERT' THEN
-   		objetApres := '{'||NEW.nomEquipe||','||NEW.date||','||NEW.entraineur||'}';
+		objetAvant := '{}';
+			objetApres := '{'||NEW.nomEquipe||','||NEW.date||','||NEW.entraineur||'}';
         operation := 'AJOUTER';
     END IF;
 	IF TG_OP = 'DELETE' THEN
     	objetAvant := '{'||OLD.nomEquipe||','||OLD.date||','||OLD.entraineur||'}';
+		objetApres := '{}';
         operation := 'EFFACER';
     END IF;
  	description := objetAvant || ' -> ' || objetApres;
@@ -198,10 +200,23 @@ INSERT INTO journal VALUES (15, '2018-09-20 11:23:48.700641-04', 'INSERT', '{Par
 INSERT INTO journal VALUES (16, '2018-09-20 11:29:06.004611-04', 'INSERT', ' -> {Paris,Mai,Emery}', 'vainqueur');
 INSERT INTO journal VALUES (17, '2018-09-20 11:30:33.415524-04', 'INSERT', ' -> {Paris,Mai,Emery}', 'vainqueur');
 
+INSERT INTO journal VALUES (19, '2018-09-20 11:37:11.75627-04', 'MODIFIER', '{Paris, 2016-06-01} -> {Bayern,Juin,Klopp}', 'vainqueur');
+INSERT INTO journal VALUES (20, '2018-09-20 11:37:11.75627-04', 'MODIFIER', '{Paris, 2016-06-01} -> {Bayern,Juin,Klopp}', 'vainqueur');
+INSERT INTO journal VALUES (21, '2018-09-20 11:37:11.75627-04', 'MODIFIER', '{Paris, 2016-06-01} -> {Bayern,Juin,Klopp}', 'vainqueur');
+INSERT INTO journal VALUES (22, '2018-09-20 11:37:11.75627-04', 'MODIFIER', '{Paris, 2016-06-01} ->{Bayern,Juin,Klopp}', 'vainqueur');
+INSERT INTO journal VALUES (23, '2018-09-20 11:37:11.75627-04', 'MODIFIER', '{Paris, 2016-06-01} -> {Bayern,Juin,Klopp}', 'vainqueur');
+INSERT INTO journal VALUES (24, '2018-09-20 11:37:11.75627-04', 'MODIFIER', '{Paris, 2016-06-01} -> {Bayern,Juin,Klopp}', 'vainqueur');
+INSERT INTO journal VALUES (25, '2018-09-20 11:37:11.75627-04', 'MODIFIER', '{Paris, 2016-06-01} -> {Bayern,Juin,Klopp}', 'vainqueur');
+INSERT INTO journal VALUES (26, '2018-09-20 11:37:11.75627-04', 'MODIFIER', '{Paris, 2016-06-01} -> {Bayern,Juin,Klopp}', 'vainqueur');
+INSERT INTO journal VALUES (27, '2018-09-20 11:37:11.75627-04', 'MODIFIER', '{Paris, 2016-06-01} -> {Bayern,Juin,Klopp}', 'vainqueur');
+INSERT INTO journal VALUES (28, '2018-09-20 11:37:11.75627-04', 'MODIFIER', '{Paris, 2016-06-01} -> {Bayern,Juin,Klopp}', 'vainqueur');
+INSERT INTO journal VALUES (29, '2018-09-20 11:39:37.70787-04', 'EFFACER', '{Bayern,Juin,Klopp} -> ', 'vainqueur');
+INSERT INTO journal VALUES (30, '2018-09-20 11:40:48.312734-04', 'EFFACER', '{Bayern,Juin,Klopp} -> {}', 'vainqueur');
+
  --
 -- Name: journal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
- SELECT pg_catalog.setval('journal_id_seq', 18, true);
+ SELECT pg_catalog.setval('journal_id_seq', 30, true);
 
  
  --
@@ -215,15 +230,15 @@ INSERT INTO journal VALUES (17, '2018-09-20 11:30:33.415524-04', 'INSERT', ' -> 
 INSERT INTO vainqueur VALUES ('Real', '11 Mai 2013', 'Makelele', 'Benzema', 1);
 INSERT INTO vainqueur VALUES ('Bayern', '25 Juin 2011', 'Guardiola', 'Robben', 2);
 INSERT INTO vainqueur VALUES ('Coucou', 'Noir', '5', '2016', 6);
-INSERT INTO mouton VALUES ('paris', 'Mars', 'Emery', 'motta', 24);
-INSERT INTO mouton VALUES ('paris', 'Mars', 'Emery', 'motta', 25);
-INSERT INTO mouton VALUES ('paris', 'Mars', 'Emery', 'motta', 26);
-INSERT INTO mouton VALUES ('paris', 'Mars', 'Emery', 'motta', 27);
-INSERT INTO mouton VALUES ('paris', 'Mars', 'Emery', 'motta', 28);
-INSERT INTO mouton VALUES ('paris', 'Mars', 'Emery', 'motta', 31);
-INSERT INTO mouton VALUES ('paris', 'Mars', 'Emery', 'motta', 33);
-INSERT INTO mouton VALUES ('paris', 'Mars', 'Emery', 'motta', 34);
-INSERT INTO mouton VALUES ('paris', 'Mars', 'Emery', 'motta', 36);
+INSERT INTO mouton VALUES ('Madrid', 'Mars', 'Emery', 'motta', 24);
+INSERT INTO mouton VALUES ('Madrid', 'Mars', 'Emery', 'motta', 25);
+INSERT INTO mouton VALUES ('Madrid', 'Mars', 'Emery', 'motta', 26);
+INSERT INTO mouton VALUES ('Madrid', 'Mars', 'Emery', 'motta', 27);
+INSERT INTO mouton VALUES ('Madrid', 'Mars', 'Emery', 'motta', 28);
+INSERT INTO mouton VALUES ('Madrid', 'Mars', 'Emery', 'motta', 31);
+INSERT INTO mouton VALUES ('Madrid', 'Mars', 'Emery', 'motta', 33);
+INSERT INTO mouton VALUES ('Madrid', 'Mars', 'Emery', 'motta', 34);
+INSERT INTO mouton VALUES ('Madrid', 'Mars', 'Emery', 'motta', 36);
 
  --
 -- Name: vainqueur_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
@@ -250,6 +265,8 @@ ALTER TABLE ONLY journal
  CREATE TRIGGER evenementajoutvainqueur BEFORE INSERT ON mouton FOR EACH ROW EXECUTE PROCEDURE journaliser();
  
  CREATE TRIGGER evenementmodifiervainqueur BEFORE UPDATE ON mouton FOR EACH ROW EXECUTE PROCEDURE journaliser();
+ 
+ CREATE TRIGGER evenementeffacermouton BEFORE DELETE ON mouton FOR EACH ROW EXECUTE PROCEDURE journaliser();
 
  --
 -- Name: distinction one_vainqueur_to_many_distinction; Type: FK CONSTRAINT; Schema: public; Owner: postgres
