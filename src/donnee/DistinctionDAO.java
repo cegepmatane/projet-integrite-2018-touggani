@@ -18,7 +18,7 @@ import modele.Vainqueur;
 		this.connection = BaseDeDonnees.getInstance().getConnection();
 	}
 	
-	public List<Distinction> listerDistinctions(int idVainqueur)
+	public List<Distinction> listerDistinctionsParVainqueur(int idVainqueur)
 	{
 		System.out.println("DistinctionDAO.listerDistinctions()");
 		List<Distinction> listeDistinctions =  new ArrayList<Distinction>();			

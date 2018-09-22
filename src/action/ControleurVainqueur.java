@@ -20,13 +20,15 @@ public class ControleurVainqueur {
 	private VueEditerVainqueur vueEditerVainqueur = null;
 	private VueListeVainqueur vueListeVainqueur = null;
 	private VueVainqueurs vueVainqueur = null;
-
+	private VainqueurDAO vainqueurDAO = null;
+ 	private DistinctionDAO distinctionDAO = null;
 
 	private ControleurVainqueur()
 	{
 		System.out.println("Initialisation du controleur");
 		this.vainqueurDAO = new VainqueurDAO();
 		distinctionDAO = new DistinctionDAO();
+		
 	}
 	
 	public void activerVues(NavigateurDesVues navigateur)
@@ -102,7 +104,7 @@ public class ControleurVainqueur {
 	{
 		System.out.println("ControleurVainqueur.notifierEditerVainqueur("+idVainqueur+")");
 		this.vueEditerVainqueur.afficherVainqueur(this.vainqueurDAO.rapporterVainqueur(idVainqueur));
-		this.vueEditerVainqueur.afficherListeDistinction(this.distinctionDAO.listerDistinctions(idVainqueur));
+		this.vueEditerVainqueur.afficherListeDistinction(this.distinctionDAO.listerDistinctionsParVainqueur(idVainqueur));
 		this.navigateur.naviguerVersVueEditerVainqueur();
 		
 	}
