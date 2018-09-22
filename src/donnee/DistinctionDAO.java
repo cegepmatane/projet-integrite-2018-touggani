@@ -1,5 +1,6 @@
 package donnee;
  import java.sql.Connection;
+ import java.sql.PreparedStatement;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -22,10 +23,12 @@ import modele.Vainqueur;
 	{
 		System.out.println("DistinctionDAO.listerDistinctions()");
 		List<Distinction> listeDistinctions =  new ArrayList<Distinction>();			
-		Statement requeteListeDistinctions;
+		PreparedStatement requeteListeDistinctions;
+		String SQL_LISTER_DISTINCTIONS_PAR_VAINQUEUR = "SELECT * FROM distinction WHERE vainqueur = ?";
 		try {
-			requeteListeDistinctions = connection.createStatement();
-			ResultSet curseurListeDistinctions = requeteListeDistinctions.executeQuery("SELECT * FROM distinction WHERE vainqueur = " + idVainqueur);
+			requeteListeDistinctions = connection.prepareStatement(SQL_LISTER_DISTINCTIONS_PAR_VAINQUEUR);
+			requeteListeDistinctions.setInt(1, idVainqueur);
+			ResultSet curseurListeDistinctions = requeteListeDistinctions.executeQuery();
 			while(curseurListeDistinctions.next())
 			{
 				int id = curseurListeDistinctions.getInt("id");
