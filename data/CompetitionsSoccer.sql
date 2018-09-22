@@ -66,6 +66,9 @@ BEGIN
  	description := objetAvant || ' -> ' || objetApres;
     -- https://www.postgresql.org/docs/9.1/static/plpgsql-trigger.html
 	INSERT into journal(moment, operation, objet, description) VALUES(NOW(), operation, 'vainqueur', description);
+	IF TG_OP = 'DELETE' THEN
+		return OLD;
+	END IF; 
 	return NEW;
 END
 $$;
@@ -212,11 +215,12 @@ INSERT INTO journal VALUES (27, '2018-09-20 11:37:11.75627-04', 'MODIFIER', '{Pa
 INSERT INTO journal VALUES (28, '2018-09-20 11:37:11.75627-04', 'MODIFIER', '{Paris, 2016-06-01} -> {Bayern,Juin,Klopp}', 'vainqueur');
 INSERT INTO journal VALUES (29, '2018-09-20 11:39:37.70787-04', 'EFFACER', '{Bayern,Juin,Klopp} -> ', 'vainqueur');
 INSERT INTO journal VALUES (30, '2018-09-20 11:40:48.312734-04', 'EFFACER', '{Bayern,Juin,Klopp} -> {}', 'vainqueur');
+INSERT INTO journal VALUES (31, '2018-09-20 11:42:43.235306-04', 'EFFACER', '{Bayern,Janvier,Robben} -> {}', 'vainqueur');
 
  --
 -- Name: journal_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
- SELECT pg_catalog.setval('journal_id_seq', 30, true);
+ SELECT pg_catalog.setval('journal_id_seq', 31, true);
 
  
  --
@@ -232,7 +236,6 @@ INSERT INTO vainqueur VALUES ('Bayern', '25 Juin 2011', 'Guardiola', 'Robben', 2
 INSERT INTO vainqueur VALUES ('Coucou', 'Noir', '5', '2016', 6);
 INSERT INTO mouton VALUES ('Madrid', 'Mars', 'Emery', 'motta', 24);
 INSERT INTO mouton VALUES ('Madrid', 'Mars', 'Emery', 'motta', 25);
-INSERT INTO mouton VALUES ('Madrid', 'Mars', 'Emery', 'motta', 26);
 INSERT INTO mouton VALUES ('Madrid', 'Mars', 'Emery', 'motta', 27);
 INSERT INTO mouton VALUES ('Madrid', 'Mars', 'Emery', 'motta', 28);
 INSERT INTO mouton VALUES ('Madrid', 'Mars', 'Emery', 'motta', 31);
