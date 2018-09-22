@@ -21,8 +21,10 @@ public class VueEditerVainqueur extends Scene {
 	protected TextField valeurCapitaine;
 	
 	private ControleurVainqueur controleur = null;
+	protected GridPane grilleListeDistinctions = new GridPane();
 	protected Button actionEnregistrerVainqueur = null;
-	GridPane grilleListeDistinctions = new GridPane();
+	protected Button actionAjouterDistinction = null;
+
 
 	
 	private int idVainqueur = 0;
@@ -31,6 +33,16 @@ public class VueEditerVainqueur extends Scene {
 		super(new VBox(), 400, 400);
 		VBox panneau = (VBox) this.getRoot();
 		GridPane grilleVainqueur = new GridPane();
+		
+		this.actionAjouterDistinction = new Button("Ajouter une distinction");
+		
+		this.actionAjouterDistinction.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent arg0) {
+				
+			}
+		});
+		
 		this.actionEnregistrerVainqueur = new Button("Enregistrer");
 		
 		this.actionEnregistrerVainqueur.setOnAction(new EventHandler<ActionEvent>() {
@@ -59,6 +71,9 @@ public class VueEditerVainqueur extends Scene {
 		
 		panneau.getChildren().add(new Label("Editer un vainqueur"));
 		panneau.getChildren().add(grilleVainqueur);
+		panneau.getChildren().add(this.actionEnregistrerVainqueur);
+		panneau.getChildren().add(grilleListeDistinctions);
+		panneau.getChildren().add(this.actionAjouterDistinction);
 
 	}
 	
