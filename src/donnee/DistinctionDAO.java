@@ -31,13 +31,13 @@ import modele.Vainqueur;
 			while(curseurListeDistinctions.next())
 			{
 				int id = curseurListeDistinctions.getInt("id");
-				int annee = curseurListeDistinctions.getInt("annee");
 				String titre = curseurListeDistinctions.getString("titre");
-				String detail = curseurListeDistinctions.getString("detail");				
-				System.out.println("Distinction " + titre + " donnée en " + annee);
+				String description = curseurListeDistinctions.getString("description");
+				String prix = curseurListeDistinctions.getString("prix");	
+				int idvainqueur = curseurListeDistinctions.getInt("idvainqueur");
+				System.out.println("Distinction " + titre );
 				
-				Distinction distinction = new Distinction(annee, titre);
-				distinction.setDetail(detail);
+				Distinction distinction = new Distinction(titre, description, prix, idvainqueur);
 				distinction.setId(id);
 				listeDistinctions.add(distinction);
 			}
@@ -77,7 +77,7 @@ import modele.Vainqueur;
 		return listeDistinctions;
 		}	
 		
-		public List<Distinction> simulerListerDistinctions()
+		public List<Distinction> simulerListerDistinctions(){
 		
 		List<Distinction> listeDistinctions = new ArrayList<Distinction>();
 		Distinction prix;

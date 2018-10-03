@@ -8,6 +8,5 @@ public class App {
  		
  		//VueCompetitions.launch(VueCompetitions.class, args);
  		NavigateurDesVues.launch(NavigateurDesVues.class, args);
-
  	}
 } 	

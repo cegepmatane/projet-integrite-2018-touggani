@@ -1,31 +1,26 @@
 package modele;
- import java.util.Calendar;
  public class Distinction {
 	
+	 
 	protected int id;
-	protected int annee;
 	protected String titre;
-	
-	public Distinction() { 
-		this.annee = Calendar.getInstance().get(Calendar.YEAR);
-	}
-	
-	public Distinction(int annee, String titre) {
+	protected String description;
+	protected String prix;
+	protected int idvainqueur;
+	 
+	 public Distinction(String titre, String description, String prix, int idvainqueur) {
 		super();
-		this.annee = annee;
 		this.titre = titre;
+		this.description = description;
+		this.prix = prix;
+		this.idvainqueur = idvainqueur;
 	}
+	 
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
-	}
-	public int getAnnee() {
-		return annee;
-	}
-	public void setAnnee(int annee) {
-		this.annee = annee;
 	}
 	public String getTitre() {
 		return titre;
@@ -33,12 +28,23 @@ package modele;
 	public void setTitre(String titre) {
 		this.titre = titre;
 	}
-	public String getDetail() {
-		return detail;
+	public String getDescription() {
+		return description;
 	}
-	public void setDetail(String detail) {
-		this.detail = detail;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	protected String detail;
+	public String getPrix() {
+		return prix;
+	}
+	public void setPrix(String prix) {
+		this.prix = prix;
+	}
+	public int getIdvainqueur() {
+		return idvainqueur;
+	}
+	public void setIdvainqueur(int idvainqueur) {
+		this.idvainqueur = idvainqueur;
+	}
 
  }

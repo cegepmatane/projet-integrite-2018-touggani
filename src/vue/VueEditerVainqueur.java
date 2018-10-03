@@ -83,8 +83,8 @@ public class VueEditerVainqueur extends Scene {
 		int item = 0;
 		for(Distinction distinction : listeDistinctions)
 		{
-			this.grilleListeDistinctions.add(new Label(distinction.getAnnee() + ""), 0, item);
-			this.grilleListeDistinctions.add(new Label(distinction.getTitre()), 1, item);
+			this.grilleListeDistinctions.add(new Label(distinction.getTitre() + ""), 0, item);
+			this.grilleListeDistinctions.add(new Label(distinction.getDescription()), 1, item);
 			this.grilleListeDistinctions.add(new Button("Éditer"), 2, item);
 			this.grilleListeDistinctions.add(new Button("Effacer"), 3, item);
 			item++;
