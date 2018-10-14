@@ -10,6 +10,7 @@ import action.ControleurVainqueur;
 	
 	private Stage stade;
 	private VueAjouterVainqueur vueAjouterVainqueur = null;
+	private VueAjouterDistinction vueAjouterDistinction = null;
 	private VueEditerVainqueur vueEditerVainqueur = null;
 	private VueListeVainqueur vueListeVainqueur = null;
 	private VueVainqueurs vueVainqueur = null;
@@ -18,6 +19,7 @@ import action.ControleurVainqueur;
 	public NavigateurDesVues() 
 	{
 		this.vueAjouterVainqueur = new VueAjouterVainqueur();
+		this.vueAjouterDistinction = new VueAjouterDistinction();
 		this.vueEditerVainqueur = new VueEditerVainqueur();
 		this.vueListeVainqueur = new VueListeVainqueur();
 		this.vueVainqueur = new VueVainqueurs();
@@ -32,6 +34,7 @@ import action.ControleurVainqueur;
 		this.controleur = ControleurVainqueur.getInstance(); 
 		this.controleur.activerVues(this);
 		this.vueAjouterVainqueur.setControleur(controleur);
+		this.vueAjouterDistinction.setControleur(controleur);
 		this.vueEditerVainqueur.setControleur(controleur);
 		this.vueListeVainqueur.setControleur(controleur);
 		this.vueVainqueur.setControleur(controleur);
@@ -72,7 +75,12 @@ import action.ControleurVainqueur;
 			stade.setScene(this.vueListeVainqueur);
 			stade.show();		
 		}
-			
+		
+		public void naviguerVersVueAjouterDistinction()
+		{
+			stade.setScene(this.vueAjouterDistinction);
+			stade.show();		
+		}
 			
 			
 	}

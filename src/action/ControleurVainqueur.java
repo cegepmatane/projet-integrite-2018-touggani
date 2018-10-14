@@ -108,5 +108,10 @@ public class ControleurVainqueur {
 		this.navigateur.naviguerVersVueEditerVainqueur();
 		
 	}
+	public void notifierNaviguerAjouterDistinction()
+	{
+		System.out.println("ControleurVainqueur.notifierNaviguerAjouterVainqueur()");
+		this.navigateur.naviguerVersVueAjouterDistinction();
+	}
 
 }

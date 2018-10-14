@@ -59,13 +59,12 @@ import modele.Vainqueur;
 			while(curseurListeDistinctions.next())
 			{
 				int id = curseurListeDistinctions.getInt("id");
-				int annee = curseurListeDistinctions.getInt("annee");
 				String titre = curseurListeDistinctions.getString("titre");
-				String detail = curseurListeDistinctions.getString("detail");				
-				System.out.println("Distinction " + titre + " donnée en " + annee);
+				String description = curseurListeDistinctions.getString("description");
+				String prix = curseurListeDistinctions.getString("prix");
+				int idvainqueur = curseurListeDistinctions.getInt("idvainqueur");				
 				
-				Distinction distinction = new Distinction(annee, titre);
-				distinction.setDetail(detail);
+				Distinction distinction = new Distinction(titre, description, prix, idvainqueur);
 				distinction.setId(id);
 				listeDistinctions.add(distinction);
 			}
@@ -81,13 +80,9 @@ import modele.Vainqueur;
 		
 		List<Distinction> listeDistinctions = new ArrayList<Distinction>();
 		Distinction prix;
-		prix = new Distinction(2015, "Meilleur equipe");
+		prix = new Distinction("Meilleur equipe", "Meilleur equipe de la competition", "Medaille d'or", 1);
 		listeDistinctions.add(prix);
-		prix = new Distinction(2016, "Equipe a prendre le moins de but");
-		listeDistinctions.add(prix);
-		prix = new Distinction(2016, "Equipe a mettre le plus de but");
-		listeDistinctions.add(prix);
-		prix = new Distinction(2016, "Meilleur entraineur de la competition");
+		prix = new Distinction("Meilleur buteur", "L'equipe a le meilleur buteur de la competition", "Petite coupe", 1);
 		listeDistinctions.add(prix);
 
 		

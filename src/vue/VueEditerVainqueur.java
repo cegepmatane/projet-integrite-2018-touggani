@@ -39,7 +39,7 @@ public class VueEditerVainqueur extends Scene {
 		this.actionAjouterDistinction.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent arg0) {
-				
+				controleur.notifierNaviguerAjouterDistinction();
 			}
 		});
 		
